@@ -1,0 +1,80 @@
+/* Global responsive overrides for mobile and small screens
+   Preserves desktop layout; stacks spreads into a single-column
+   vertically scrollable interface on phones. */
+
+/* Ensure images and videos never cause horizontal overflow */
+img, video { max-width: 100%; height: auto; display: block; }
+
+/* Default: no change for desktop (>= 769px) */
+
+@media (max-width: 768px) {
+  html, body { height: auto; overflow-y: auto; }
+
+  /* Turn the two-page spread into a stacked single page */
+  .spread { display: block !important; width: 100vw !important; height: auto !important; box-shadow: none !important; margin: 0; border-radius: 0; }
+  .page { width: 100% !important; padding: 20px !important; min-height: unset !important; box-sizing: border-box; }
+  .page-left, .page-right { flex: none !important; position: relative; }
+
+  /* Typography scaling for readability */
+  .chapter-numeral { font-size: 48px !important; opacity: 0.12; }
+  .chapter-title { font-size: 20px !important; }
+  .story p, .story-right p, .subtitle { font-size: 16px !important; line-height: 1.6 !important; }
+
+  /* Page numbers flow inline */
+  .pg-num { position: relative !important; bottom: auto !important; left: auto !important; transform: none !important; margin-top: 12px; text-align: center; }
+
+  /* Navigation: sticky footer on mobile with next button only */
+  .nav-bar { 
+    position: sticky !important; 
+    bottom: 0; 
+    left: 0; 
+    transform: none; 
+    width: 100%; 
+    justify-content: flex-end; 
+    padding: 12px 16px; 
+    gap: 12px; 
+    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.75) 100%);
+    z-index: 9999;
+    border-top: 0.5px solid rgba(184,154,106,0.2);
+  }
+  
+  /* Hide previous button on mobile */
+  .nav-btn:first-child { display: none !important; }
+  
+  /* Style next button for mobile */
+  .nav-btn { 
+    min-height: 44px; 
+    padding: 12px 20px; 
+    font-size: 15px; 
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Filmstrip / modal adapt to full width and touch optimizations */
+  .film-overlay, .film-strip, .film-modal { left: 0 !important; right: 0 !important; width: 100% !important; }
+  .film-modal { align-items: flex-end !important; padding-bottom: 0; }
+  .film-main { width: 100% !important; height: auto !important; }
+  .film-photo-wrap img, .film-photo-wrap video { width: 100% !important; height: auto !important; object-fit: contain; }
+
+  /* Cover / shelf scenes scale to full width */
+  .book-wrap, .cover, .shelf-scene, .shelf-plank { width: 100% !important; height: auto !important; box-shadow: none !important; }
+
+  /* Reduce large decorative spacing */
+  .page { gap: 10px; }
+  .chapter-rule { margin-top: 10px; }
+
+  /* Make interactive targets larger for touch */
+  a, button { touch-action: manipulation; }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 14px !important; }
+  .chapter-numeral { font-size: 40px !important; }
+  .main-title { font-size: 32px !important; }
+  .cover-title { font-size: 28px !important; }
+  .story p { font-size: 15px !important; }
+  .nav-btn, .open-btn { padding: 10px 14px; font-size: 15px; }
+}
+
+/* Utility: prevent horizontal scroll from accidental large elements */
+body, html { overscroll-behavior-x: contain; }
