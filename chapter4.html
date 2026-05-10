@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Chapter IV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:     #0E0E14;
+      --page-left:    #1C1C22;
+      --page-right:   #22222A;
+      --gold:         #B89A6A;
+      --gold-soft:    #D4BC96;
+      --gold-dim:     #8C7040;
+      --ink-bright:   #EDE8DF;
+      --ink-mid:      #C8C2B5;
+      --ink-light:    #9A9488;
+      --ink-faint:    #6A6460;
+
+      /* Film palette */
+      --film-bg:    #0a0a0e;
+      --film-frame: #131318;
+      --film-border:#222228;
+      --film-hole:  #000;
+      --film-amber: #c8921a;
+      --film-text:  #d4c8a8;
+      --film-dim:   #6a6050;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 25%, rgba(184,154,106,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 75%, rgba(184,154,106,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── Spread ── */
+    .spread {
+      display: flex;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      box-shadow:
+        -6px 0 24px rgba(0,0,0,0.45),
+         6px 0 24px rgba(0,0,0,0.45),
+         0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Shared page ── */
+    .page {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 44px 50px 42px;
+      overflow: hidden;
+    }
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* ── Left page ── */
+    .page-left {
+      background: #1C1C22;
+      border-right: 0.5px solid rgba(184,154,106,0.12);
+    }
+    .page-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; width: 38px;
+      background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Right page ── */
+    .page-right {
+      background: #22222A;
+    }
+    .page-right::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0; width: 28px;
+      background: linear-gradient(to right, rgba(0,0,0,0.28), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Chapter header ── */
+    .chapter-header {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 18px;
+    }
+    .chapter-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.75;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .chapter-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.1;
+      line-height: 0.85;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .chapter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+    .chapter-date {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+    .chapter-rule {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .rule-line { flex: 1; height: 0.5px; background: var(--gold); opacity: 0.22; }
+    .rule-dot  { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.4; flex-shrink: 0; }
+
+    /* ── Story text ── */
+    .story {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+    .story p {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.82;
+      margin-bottom: 12px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story p:last-child { margin-bottom: 0; }
+    .story em { font-style: italic; color: var(--ink-bright); }
+
+    /* Drop cap */
+    .story p.dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-style: italic;
+      color: var(--gold);
+      float: left;
+      line-height: 0.78;
+      margin-right: 6px;
+      margin-top: 8px;
+    }
+
+    /* Bracketed placeholders */
+    .ph {
+      font-family: 'Jost', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--gold-soft);
+      background: rgba(184,154,106,0.10);
+      border: 0.5px dashed rgba(184,154,106,0.35);
+      border-radius: 3px;
+      padding: 0px 5px;
+      letter-spacing: 0.02em;
+      font-style: normal;
+      white-space: nowrap;
+    }
+
+    /* ── IMAGE SLOT ── */
+    .img-slot {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      cursor: pointer;
+      border: 1px dashed rgba(184,154,106,0.25);
+      border-radius: 3px;
+      background: rgba(184,154,106,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-shrink: 0;
+      padding: 10px;
+      transition: border-color 0.2s, background 0.2s;
+      overflow: hidden;
+    }
+    .img-slot:hover {
+      border-color: rgba(184,154,106,0.5);
+      background: rgba(184,154,106,0.06);
+    }
+    .img-slot svg { opacity: 0.3; }
+    .img-slot-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      opacity: 0.55;
+      text-align: center;
+    }
+    .img-slot-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--ink-light);
+      opacity: 0.5;
+      text-align: center;
+    }
+    .img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
+      opacity: 0.86;
+    }
+    .img-slot.has-gallery::after {
+      content: '⬡';
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 10px;
+      color: var(--gold);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    /* ── Right page layout ── */
+    .right-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 14px;
+    }
+
+    .img-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .img-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11.5px;
+      font-style: italic;
+      color: var(--ink-light);
+      opacity: 0.6;
+      text-align: center;
+    }
+
+    .continued-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.55;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .continued-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.22;
+    }
+
+    .story-right {
+      flex: 1;
+    }
+    .story-right p {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.82;
+      margin-bottom: 12px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story-right p:last-child { margin-bottom: 0; }
+    .story-right em { font-style: italic; color: var(--ink-bright); }
+
+    .timestamp {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .timestamp-line { flex: 1; height: 0.5px; background: var(--ink-faint); opacity: 0.25; }
+    .timestamp-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      opacity: 0.6;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── Page numbers ── */
+    .pg-num {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* ── Nav ── */
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spread  { animation: fadeUp 0.8s ease both; }
+    .nav-bar { animation: fadeUp 0.8s 0.3s ease both; }
+
+    /* 3D book / page flip layout */
+    .book-wrap { perspective: 1800px; }
+    .book {
+      position: relative;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      transform-style: preserve-3d;
+    }
+    .spread.stack {
+      position: absolute;
+      inset: 0;
+      transform-origin: left center;
+      backface-visibility: hidden;
+      transition: transform 700ms cubic-bezier(.2,.9,.25,1), opacity 250ms ease;
+      will-change: transform, opacity;
+    }
+    .spread.stack.hidden { opacity: 0; pointer-events: none; }
+    .spread.stack.next { transform: rotateY(180deg); }
+    .spread.stack.turning { transform: rotateY(-180deg); z-index: 2; }
+    .spread.stack.incoming { transform: rotateY(0deg); z-index: 3; }
+
+    /* ══════════════════════════════════════
+       FILMSTRIP GALLERY
+       ══════════════════════════════════════ */
+
+    .film-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,4,4,0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+    }
+    .film-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .film-strip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: min(680px, 92vw);
+      animation: filmDrop 0.35s cubic-bezier(.2,.9,.25,1) both;
+    }
+    @keyframes filmDrop {
+      from { opacity: 0; transform: translateY(-24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    .sprocket-row {
+      width: 100%;
+      height: 22px;
+      background: var(--film-bg);
+      border: 1px solid var(--film-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+    .sprocket-row.top { border-bottom: none; border-radius: 6px 6px 0 0; }
+    .sprocket-row.bottom { border-top: none; border-radius: 0 0 6px 6px; }
+    .sprocket-hole {
+      width: 14px; height: 10px;
+      background: var(--film-hole);
+      border-radius: 2px;
+      border: 1.5px solid #1e1e1e;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.03);
+      flex-shrink: 0;
+    }
+
+    .film-main-frame {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 8px 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .film-counter-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2px 6px;
+    }
+    .film-counter-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      color: var(--film-amber);
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+    .film-counter-num {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--film-amber);
+    }
+    .film-exposure-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .film-exposure-dots span {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--film-amber);
+      opacity: 0.25;
+      transition: opacity 0.2s;
+    }
+    .film-exposure-dots span.active { opacity: 0.9; }
+
+    .film-photo-wrap {
+      position: relative;
+      width: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .film-photo-wrap img {
+      max-width: 100%;
+      max-height: 55vh;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      transition: opacity 0.22s ease;
+    }
+    .film-photo-wrap img.fading { opacity: 0; }
+
+    .film-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,0.55);
+      border: 0.5px solid rgba(200,146,26,0.25);
+      border-radius: 50%;
+      color: var(--film-amber);
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.18s, border-color 0.18s;
+      line-height: 1;
+    }
+    .film-arrow:hover { background: rgba(200,146,26,0.22); border-color: rgba(200,146,26,0.6); }
+    .film-arrow.left  { left: -18px; }
+    .film-arrow.right { right: -18px; }
+
+    .film-caption-area {
+      padding: 8px 2px 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .film-caption-badge {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--film-amber);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .film-caption-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--film-text);
+      opacity: 0.75;
+      line-height: 1.4;
+    }
+
+    .film-divider {
+      width: 100%;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--film-bg) 0px, var(--film-bg) 6px,
+        var(--film-border) 6px, var(--film-border) 7px
+      );
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+    }
+
+    .film-thumbs-outer {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 8px 28px;
+      overflow: hidden;
+    }
+    .film-thumbs {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .film-thumbs::-webkit-scrollbar { display: none; }
+
+    .film-thumb {
+      flex-shrink: 0;
+      width: 60px; height: 40px;
+      background: #1c1c1c;
+      border: 1.5px solid transparent;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.18s, opacity 0.18s;
+      opacity: 0.5;
+    }
+    .film-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; background: #111; }
+    .film-thumb.active { border-color: var(--gold); opacity: 1; }
+
+    .film-close-row {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 0 28px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .film-close-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+      background: none;
+      border: 0.5px solid var(--film-border);
+      padding: 5px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .film-close-btn:hover { color: var(--gold-soft); border-color: var(--gold); }
+    .film-title-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+    }
+
+    .film-photo-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE RESPONSIVENESS
+       ══════════════════════════════════════ */
+
+    /* ── Tablets: 768px and below ── */
+    @media (max-width: 768px) {
+      .spread {
+        width: min(100vw, 95vw);
+        height: auto;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      }
+      .book {
+        width: min(100vw, 95vw);
+        height: auto;
+      }
+      .page {
+        padding: 32px 28px;
+        min-height: 60vh;
+      }
+      .page-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(184,154,106,0.12);
+      }
+      .page-left::after {
+        width: 0;
+        display: none;
+      }
+      .page-right::after {
+        width: 0;
+        display: none;
+      }
+      
+      .chapter-numeral { font-size: 48px; }
+      .chapter-title { font-size: 18px; }
+      .body-text { font-size: 15px; line-height: 1.6; }
+      .spread-meta { font-size: 12px; }
+      
+      .film-strip { width: min(90vw, 500px); }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 40vh;
+      }
+      .film-thumb { width: 50px; height: 35px; }
+    }
+
+    /* ── Medium phones: 600px and below ── */
+    @media (max-width: 600px) {
+      html, body { overflow-y: auto; }
+      body { justify-content: flex-start; padding: 16px 0; }
+      
+      .spread {
+        width: 100vw;
+        height: auto;
+        margin: 0 auto;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .book {
+        width: 100vw;
+        height: auto;
+      }
+      .book-wrap { perspective: 1200px; }
+      
+      .page {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+      
+      /* Typography scaling */
+      .chapter-eyebrow { font-size: 7px; margin-bottom: 6px; }
+      .chapter-numeral { font-size: 36px; opacity: 0.08; }
+      .chapter-title { font-size: 16px; margin-bottom: 12px; }
+      .chapter-date { font-size: 7.5px; }
+      
+      .body-text {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .spread-meta {
+        font-size: 11px;
+        margin-top: auto;
+      }
+      
+      /* Navigation buttons - larger touch targets */
+      .nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 20px;
+      }
+      .nav-btn.prev, .nav-btn.next {
+        position: fixed;
+        bottom: 24px;
+        z-index: 100;
+      }
+      .nav-btn.prev { left: 16px; }
+      .nav-btn.next { right: 16px; }
+      
+      /* Gallery modal mobile optimization */
+      .film-overlay.open {
+        display: flex;
+        align-items: flex-end;
+      }
+      .film-strip {
+        width: 100vw;
+        max-height: 95vh;
+        border-radius: 12px 12px 0 0;
+        gap: 0;
+      }
+      .film-photo-wrap {
+        min-height: 45vh;
+      }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 45vh;
+        max-width: 95vw;
+      }
+      .film-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
+      .film-arrow.left { left: -8px; }
+      .film-arrow.right { right: -8px; }
+      
+      .film-caption-text { font-size: 12px; }
+      .film-thumb { width: 45px; height: 30px; }
+      .film-thumbs-outer { padding: 8px 16px; }
+      .film-counter-num { font-size: 10px; }
+      
+      .sprocket-hole { width: 12px; height: 8px; }
+      .sprocket-row { height: 18px; padding: 0 8px; }
+    }
+
+    /* ── Small phones: 480px and below ── */
+    @media (max-width: 480px) {
+      .page { padding: 20px 12px; }
+      
+      .chapter-numeral { font-size: 28px; }
+      .chapter-title { font-size: 15px; }
+      .chapter-eyebrow { font-size: 6px; }
+      .chapter-date { font-size: 7px; }
+      
+      .body-text { font-size: 13px; }
+      .spread-meta { font-size: 10px; }
+      
+      .nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 18px;
+      }
+      
+      .film-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 42vh;
+      }
+      
+      .film-counter-label { font-size: 8px; }
+      .film-counter-num { font-size: 9px; }
+      .film-caption-badge { font-size: 7px; }
+      .film-caption-text { font-size: 11px; }
+      .film-title-tag { font-size: 7px; }
+      .film-swipe-hint { font-size: 7px; }
+    }
+
+    /* ── Portrait orientation optimizations ── */
+    @media (orientation: portrait) and (max-width: 768px) {
+      .spread {
+        height: auto;
+        min-height: 100vh;
+      }
+      .page {
+        min-height: 50vh;
+      }
+    }
+
+    /* ── Landscape phones ── */
+    @media (orientation: landscape) and (max-height: 600px) {
+      .spread { height: auto; min-height: 95vh; }
+      .page { padding: 16px 12px; min-height: auto; }
+      .chapter-numeral { font-size: 24px; }
+      .chapter-title { font-size: 14px; }
+      .body-text { font-size: 12px; }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 35vh;
+      }
+    }
+
+    /* ── Touch device optimizations ── */
+    @media (hover: none) and (pointer: coarse) {
+      .nav-btn { min-width: 48px; min-height: 48px; }
+      .film-arrow { min-width: 44px; min-height: 44px; }
+      .film-thumb { min-width: 50px; min-height: 35px; }
+      button, a { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="book-wrap">
+    <div class="book" id="book">
+
+      <!-- SPREAD 0: MMDA COMMAND CENTER -->
+      <article class="spread stack" data-index="0">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Chapter IV · Day 3</span>
+              <span class="chapter-numeral">IV</span>
+              <h2 class="chapter-title">Control & Order: MMDA</h2>
+              <span class="chapter-date">9:00 AM · MMDA Command Center</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p class="dropcap">T<span>he pulse of the city is visible here. Wall-to-wall screens flicker with the life of Manila’s arteries, captured in real-time.</span></p>
+              <p>We arrive at the MMDA Command Center after leaving at 7:30 AM. It feels like stepping into the brain of the metropolis. Precision, monitoring, and the constant hum of data being processed to keep millions moving.</p>
+              <p>It’s a stark reminder of how Information Technology isn't just about code—it's about the infrastructure that supports human movement and safety across a vast urban landscape.</p>
+            </div>
+            <span class="pg-num">— 1 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Observations</span>
+              <div class="story-right">
+                <p>Watching the traffic flows and incident reports, I realize how much coordination happens behind the scenes. We learn about their tracking systems and how they respond to the city’s unpredictable nature.</p>
+                <p>By 11:00 AM, we head back for a quick lunch at the DJM Dormitory, our minds still racing with the scale of what we just witnessed.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="MMDA Command Center Visit"
+                     data-images='[{"src":"images/chapter4/mmda/mmda1.jpg","caption":"The giant screen monitoring Manila"},{"src":"images/chapter4/mmda/mmda2.jpg","caption":"Group photo at the lobby"},{"src":"images/chapter4/mmda/mmda3.jpg","caption":"Command center overview"},{"src":"images/chapter4/mmda/mmda4.jpg","caption":"Traffic monitoring displays"},{"src":"images/chapter4/mmda/mmda5.jpg","caption":"MMDA group photo"}]'
+                     style="height:160px;">
+                  <img src="images/chapter4/mmda/mmda1.jpg" alt="MMDA Command Center" loading="lazy" />
+                  <span class="img-slot-label">MMDA Album</span>
+                  <span class="img-slot-caption">Command Center · Monitoring the City</span>
+                </div>
+                <p class="img-caption">The technological heart of Metro Manila traffic.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Morning · MMDA</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 2 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 1: MICROSOURCING PHILIPPINES -->
+      <article class="spread stack" data-index="1">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Industry · Libis</span>
+              <span class="chapter-numeral">IV</span>
+              <h2 class="chapter-title">Microsourcing Philippines</h2>
+              <span class="chapter-date">1:00 PM · Quezon City</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>We proceed to Libis at noon. The afternoon sun is high as we enter the sleek offices of Microsourcing Philippines, Inc. The atmosphere shifts from public service to corporate innovation.</p>
+              <p>This is where global operations meet local talent. We see the workspace, the culture, and the technical requirements of a high-performing BPO environment. It feels like looking into our own potential futures.</p>
+            </div>
+            <span class="pg-num">— 3 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Professional Insight</span>
+              <div class="story-right">
+                <p>The speakers share insights about the industry, the importance of soft skills alongside technical expertise, and what it takes to thrive in a global marketplace.</p>
+                <p>We walk through the corridors where productivity hums. It’s quiet, professional, and deeply inspiring for a group of IT students.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot"
+                     data-album-title="Microsourcing Visit"
+                     data-images='[{"src":"images/chapter4/microsourcing/micro1.jpg","caption":"Modern office interiors"},{"src":"images/chapter4/microsourcing/micro2.jpg","caption":"Workspace and collaboration area"},{"src":"images/chapter4/microsourcing/micro3.jpg","caption":"Office corridor"},{"src":"images/chapter4/microsourcing/micro4.jpg","caption":"Microsourcing team area"}]'
+                     style="height:160px;">
+                  <img src="images/chapter4/microsourcing/micro1.jpg" alt="Microsourcing office" loading="lazy" />
+                  <span class="img-slot-label">Microsourcing office</span>
+                  <span class="img-slot-caption">Microsourcing Philippines</span>
+                </div>
+                <p class="img-caption">The workplace of tomorrow.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Afternoon · QC</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 4 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 2: SM NORTH & RETURN -->
+      <article class="spread stack" data-index="2">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Evening · Recreation</span>
+              <span class="chapter-numeral">IV</span>
+              <h2 class="chapter-title">Leisure time</h2>
+              <span class="chapter-date">Fun Night · Play</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>After the corporate intensity, we find ourselves at SM North Edsa. It’s a transition from workstations to a bustling center of commerce and leisure. We wander through the massive malls, finding small treasures and taking a breath.</p>
+              <p>The neon lights and the crowd offer a different kind of IT perspective—the consumer-facing world where all this technology eventually lands.</p>
+            </div>
+            <span class="pg-num">— 5 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">End of Day</span>
+              <div class="story-right">
+                <p>Dinner is back at the DJM Dormitory at 6:30 PM. We eat together, sharing stories from the day. The Command Center's screens and the office’s sleek desks blur into a singular memory of progress.</p>
+                <p>Tomorrow is another day, but today felt like we finally understood the bridge between our studies and the real world.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot"
+                     data-album-title="SM North & Dinner"
+                     data-images='[{"src":"images/chapter4/night/night1.jpg","caption":"Night return to the dormitory"}]'
+                     style="height:180px;">
+                  <img src="images/chapter4/night/night1.jpg" alt="Night return to dormitory" loading="lazy" />
+                  <span class="img-slot-label">Back to dorm</span>
+                  <span class="img-slot-caption">Evening return</span>
+                </div>
+                <p class="img-caption">Winding down after a long day of discovery.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">6:30 PM · Rest</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 6 —</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <button class="nav-btn" id="prevBtn">← Previous</button>
+    <button class="nav-btn" id="nextBtn">Next →</button>
+  </nav>
+
+  <!-- FILMSTRIP GALLERY MODAL -->
+  <div class="film-overlay" id="filmOverlay" role="dialog" aria-modal="true" aria-label="Photo filmstrip">
+    <div class="film-strip" id="filmStrip">
+      <div class="sprocket-row top" id="topSprockets"></div>
+      <div class="film-main-frame">
+        <div class="film-counter-strip">
+          <span class="film-counter-label">35mm · Chapter IV</span>
+          <span class="film-counter-num" id="filmCounter">▲ 01 / 01</span>
+          <div class="film-exposure-dots" id="filmDots"></div>
+        </div>
+        <div class="film-photo-wrap">
+          <button class="film-arrow left" id="filmPrev">&#8249;</button>
+          <img src="" alt="" id="filmMainImg" />
+          <div class="film-photo-vignette"></div>
+          <button class="film-arrow right" id="filmNext">&#8250;</button>
+        </div>
+        <div class="film-caption-area">
+          <span class="film-caption-badge">Caption</span>
+          <span class="film-caption-text" id="filmCaption">—</span>
+        </div>
+      </div>
+      <div class="film-divider"></div>
+      <div class="film-thumbs-outer">
+        <div class="film-thumbs" id="filmThumbs"></div>
+      </div>
+      <div class="film-close-row">
+        <span class="film-title-tag" id="filmAlbumTitle">Album</span>
+        <button class="film-close-btn" id="filmClose">Close ✕</button>
+      </div>
+      <div class="sprocket-row bottom" id="bottomSprockets"></div>
+    </div>
+  </div>
+
+  <script>
+    /* PAGE FLIP LOGIC */
+    (function(){
+      const spreads = Array.from(document.querySelectorAll('.spread.stack'));
+      let idx = 0;
+      const total = spreads.length;
+
+      (function(){
+        const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+        const start = params.get('start');
+        if(start !== null){
+          if(start === 'last') idx = Math.max(0, total - 1);
+          else {
+            const n = parseInt(start, 10);
+            if(!Number.isNaN(n)) idx = Math.max(0, Math.min(total - 1, n));
+          }
+        }
+      })();
+
+      function showIndex(i){
+        spreads.forEach((s, n)=>{
+          s.classList.remove('turning','incoming','next','hidden');
+          if(n < i) {
+            s.style.zIndex = 1;
+            s.classList.add('hidden');
+            s.style.transform = 'rotateY(-180deg)';
+          } else if(n === i) {
+            s.style.zIndex = 3;
+            s.style.transform = 'rotateY(0deg)';
+            s.classList.remove('hidden');
+          } else {
+            s.style.zIndex = 1;
+            s.style.transform = 'rotateY(180deg)';
+            s.classList.add('hidden');
+          }
+        });
+      }
+
+      function go(delta){
+        const from = idx;
+        const to = Math.max(0, Math.min(total-1, idx + delta));
+        if(to === from) return;
+        const current = spreads[from];
+        const next = spreads[to];
+        next.classList.remove('hidden');
+        next.style.transform = 'rotateY(180deg)';
+        requestAnimationFrame(()=>{
+          current.classList.add('turning');
+          current.style.transform = 'rotateY(-180deg)';
+          next.classList.add('incoming');
+          next.style.transform = 'rotateY(0deg)';
+        });
+        setTimeout(()=>{ idx = to; showIndex(idx); }, 780);
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', ()=>{
+        if(idx === total - 1) return window.location.href = 'chapter5.html';
+        go(1);
+      });
+      document.getElementById('prevBtn').addEventListener('click', ()=>{
+        if(idx === 0) return window.location.href = 'chapter3.html#start=last';
+        go(-1);
+      });
+
+      showIndex(idx);
+    })();
+
+    /* FILMSTRIP LOGIC */
+    (function(){
+      const overlay = document.getElementById('filmOverlay');
+      const mainImg = document.getElementById('filmMainImg');
+      const caption = document.getElementById('filmCaption');
+      const counter = document.getElementById('filmCounter');
+      const dotsEl = document.getElementById('filmDots');
+      const thumbsEl = document.getElementById('filmThumbs');
+      const albumTitle = document.getElementById('filmAlbumTitle');
+      const prevBtn = document.getElementById('filmPrev');
+      const nextBtn = document.getElementById('filmNext');
+      const closeBtn = document.getElementById('filmClose');
+      const topRow = document.getElementById('topSprockets');
+      const botRow = document.getElementById('bottomSprockets');
+
+      let images = [];
+      let pos = 0;
+
+      function buildSprockets(){
+        [topRow, botRow].forEach(row => {
+          row.innerHTML = '';
+          for(let i = 0; i < 14; i++){
+            const h = document.createElement('div'); h.className = 'sprocket-hole'; row.appendChild(h);
+          }
+        });
+      }
+      buildSprockets();
+
+      function openFilm(imgArray, start, title){
+        images = (imgArray || []).map(a => typeof a === 'string' ? { src: a } : a);
+        if(images.length === 0) images = [{ src: '', caption: 'No images yet.' }];
+        pos = start || 0;
+        albumTitle.textContent = title || 'Album';
+        updateView();
+        overlay.classList.add('open');
+      }
+
+      function updateView(){
+        const item = images[pos];
+        mainImg.src = item.src || '';
+        caption.textContent = item.caption || '—';
+        counter.textContent = `▲ ${String(pos+1).padStart(2,'0')} / ${String(images.length).padStart(2,'0')}`;
+      }
+
+      closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+      prevBtn.addEventListener('click', () => { if(pos > 0) { pos--; updateView(); } });
+      nextBtn.addEventListener('click', () => { if(pos < images.length-1) { pos++; updateView(); } });
+
+      document.querySelectorAll('.img-slot').forEach(slot => {
+        slot.addEventListener('click', () => {
+          const raw = slot.getAttribute('data-images') || '[]';
+          const title = slot.getAttribute('data-album-title') || 'Album';
+          openFilm(JSON.parse(raw), 0, title);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

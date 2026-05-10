@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Chapter V</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:     #0E0E14;
+      --page-left:    #1C1C22;
+      --page-right:   #22222A;
+      --gold:         #B89A6A;
+      --gold-soft:    #D4BC96;
+      --gold-dim:     #8C7040;
+      --ink-bright:   #EDE8DF;
+      --ink-mid:      #C8C2B5;
+      --ink-light:    #9A9488;
+      --ink-faint:    #6A6460;
+
+      /* Film palette */
+      --film-bg:    #0a0a0e;
+      --film-frame: #131318;
+      --film-border:#222228;
+      --film-hole:  #000;
+      --film-amber: #c8921a;
+      --film-text:  #d4c8a8;
+      --film-dim:   #6a6050;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 25%, rgba(184,154,106,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 75%, rgba(184,154,106,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── Spread ── */
+    .spread {
+      display: flex;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      box-shadow:
+        -6px 0 24px rgba(0,0,0,0.45),
+         6px 0 24px rgba(0,0,0,0.45),
+         0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Shared page ── */
+    .page {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 44px 50px 42px;
+      overflow: hidden;
+    }
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* ── Left page ── */
+    .page-left {
+      background: #1C1C22;
+      border-right: 0.5px solid rgba(184,154,106,0.12);
+    }
+    .page-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; width: 38px;
+      background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Right page ── */
+    .page-right {
+      background: #22222A;
+    }
+    .page-right::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0; width: 28px;
+      background: linear-gradient(to right, rgba(0,0,0,0.28), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Chapter header ── */
+    .chapter-header {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 18px;
+    }
+    .chapter-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.75;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .chapter-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.1;
+      line-height: 0.85;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .chapter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+    .chapter-date {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+    .chapter-rule {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .rule-line { flex: 1; height: 0.5px; background: var(--gold); opacity: 0.22; }
+    .rule-dot  { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.4; flex-shrink: 0; }
+
+    /* ── Story text ── */
+    .story {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+    .story p {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.82;
+      margin-bottom: 12px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story p:last-child { margin-bottom: 0; }
+    .story em { font-style: italic; color: var(--ink-bright); }
+
+    /* Drop cap */
+    .story p.dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-style: italic;
+      color: var(--gold);
+      float: left;
+      line-height: 0.78;
+      margin-right: 6px;
+      margin-top: 8px;
+    }
+
+    /* Bracketed placeholders */
+    .ph {
+      font-family: 'Jost', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--gold-soft);
+      background: rgba(184,154,106,0.10);
+      border: 0.5px dashed rgba(184,154,106,0.35);
+      border-radius: 3px;
+      padding: 0px 5px;
+      letter-spacing: 0.02em;
+      font-style: normal;
+      white-space: nowrap;
+    }
+
+    /* ── IMAGE SLOT ── */
+    .img-slot {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      cursor: pointer;
+      border: 1px dashed rgba(184,154,106,0.25);
+      border-radius: 3px;
+      background: rgba(184,154,106,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-shrink: 0;
+      padding: 10px;
+      transition: border-color 0.2s, background 0.2s;
+      overflow: hidden;
+    }
+    .img-slot:hover {
+      border-color: rgba(184,154,106,0.5);
+      background: rgba(184,154,106,0.06);
+    }
+    .img-slot svg { opacity: 0.3; }
+    .img-slot-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      opacity: 0.55;
+      text-align: center;
+    }
+    .img-slot-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--ink-light);
+      opacity: 0.5;
+      text-align: center;
+    }
+    .img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
+      opacity: 0.86;
+    }
+    .img-slot.has-gallery::after {
+      content: '⬡';
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 10px;
+      color: var(--gold);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    /* ── Right page layout ── */
+    .right-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 14px;
+    }
+
+    .img-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .img-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11.5px;
+      font-style: italic;
+      color: var(--ink-light);
+      opacity: 0.6;
+      text-align: center;
+    }
+
+    .continued-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.55;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .continued-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.22;
+    }
+
+    .story-right {
+      flex: 1;
+    }
+    .story-right p {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.82;
+      margin-bottom: 12px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story-right p:last-child { margin-bottom: 0; }
+    .story-right em { font-style: italic; color: var(--ink-bright); }
+
+    .timestamp {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .timestamp-line { flex: 1; height: 0.5px; background: var(--ink-faint); opacity: 0.25; }
+    .timestamp-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      opacity: 0.6;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── Page numbers ── */
+    .pg-num {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* ── Nav ── */
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spread  { animation: fadeUp 0.8s ease both; }
+    .nav-bar { animation: fadeUp 0.8s 0.3s ease both; }
+
+    /* 3D book / page flip layout */
+    .book-wrap { perspective: 1800px; }
+    .book {
+      position: relative;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      transform-style: preserve-3d;
+    }
+    .spread.stack {
+      position: absolute;
+      inset: 0;
+      transform-origin: left center;
+      backface-visibility: hidden;
+      transition: transform 700ms cubic-bezier(.2,.9,.25,1), opacity 250ms ease;
+      will-change: transform, opacity;
+    }
+    .spread.stack.hidden { opacity: 0; pointer-events: none; }
+    .spread.stack.next { transform: rotateY(180deg); }
+    .spread.stack.turning { transform: rotateY(-180deg); z-index: 2; }
+    .spread.stack.incoming { transform: rotateY(0deg); z-index: 3; }
+
+    /* ══════════════════════════════════════
+       FILMSTRIP GALLERY
+       ══════════════════════════════════════ */
+
+    .film-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,4,4,0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+    }
+    .film-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .film-strip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: min(680px, 92vw);
+      animation: filmDrop 0.35s cubic-bezier(.2,.9,.25,1) both;
+    }
+    @keyframes filmDrop {
+      from { opacity: 0; transform: translateY(-24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    .sprocket-row {
+      width: 100%;
+      height: 22px;
+      background: var(--film-bg);
+      border: 1px solid var(--film-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+    .sprocket-row.top { border-bottom: none; border-radius: 6px 6px 0 0; }
+    .sprocket-row.bottom { border-top: none; border-radius: 0 0 6px 6px; }
+    .sprocket-hole {
+      width: 14px; height: 10px;
+      background: var(--film-hole);
+      border-radius: 2px;
+      border: 1.5px solid #1e1e1e;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.03);
+      flex-shrink: 0;
+    }
+
+    .film-main-frame {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 8px 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .film-counter-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2px 6px;
+    }
+    .film-counter-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      color: var(--film-amber);
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+    .film-counter-num {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--film-amber);
+    }
+    .film-exposure-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .film-exposure-dots span {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--film-amber);
+      opacity: 0.25;
+      transition: opacity 0.2s;
+    }
+    .film-exposure-dots span.active { opacity: 0.9; }
+
+    .film-photo-wrap {
+      position: relative;
+      width: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .film-photo-wrap img {
+      max-width: 100%;
+      max-height: 55vh;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      transition: opacity 0.22s ease;
+    }
+    .film-photo-wrap img.fading { opacity: 0; }
+
+    .film-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,0.55);
+      border: 0.5px solid rgba(200,146,26,0.25);
+      border-radius: 50%;
+      color: var(--film-amber);
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.18s, border-color 0.18s;
+      line-height: 1;
+    }
+    .film-arrow:hover { background: rgba(200,146,26,0.22); border-color: rgba(200,146,26,0.6); }
+    .film-arrow.left  { left: -18px; }
+    .film-arrow.right { right: -18px; }
+
+    .film-caption-area {
+      padding: 8px 2px 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .film-caption-badge {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--film-amber);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .film-caption-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--film-text);
+      opacity: 0.75;
+      line-height: 1.4;
+    }
+
+    .film-divider {
+      width: 100%;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--film-bg) 0px, var(--film-bg) 6px,
+        var(--film-border) 6px, var(--film-border) 7px
+      );
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+    }
+
+    .film-thumbs-outer {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 8px 28px;
+      overflow: hidden;
+    }
+    .film-thumbs {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .film-thumbs::-webkit-scrollbar { display: none; }
+
+    .film-thumb {
+      flex-shrink: 0;
+      width: 60px; height: 40px;
+      background: #1c1c1c;
+      border: 1.5px solid transparent;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.18s, opacity 0.18s;
+      opacity: 0.5;
+    }
+    .film-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; background: #111; }
+    .film-thumb.active { border-color: var(--gold); opacity: 1; }
+
+    .film-close-row {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 0 28px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .film-close-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+      background: none;
+      border: 0.5px solid var(--film-border);
+      padding: 5px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .film-close-btn:hover { color: var(--gold-soft); border-color: var(--gold); }
+    .film-title-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+    }
+
+    .film-photo-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE RESPONSIVENESS
+       ══════════════════════════════════════ */
+
+    /* ── Tablets: 768px and below ── */
+    @media (max-width: 768px) {
+      .spread {
+        width: min(100vw, 95vw);
+        height: auto;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      }
+      .book {
+        width: min(100vw, 95vw);
+        height: auto;
+      }
+      .page {
+        padding: 32px 28px;
+        min-height: 60vh;
+      }
+      .page-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(184,154,106,0.12);
+      }
+      .page-left::after {
+        width: 0;
+        display: none;
+      }
+      .page-right::after {
+        width: 0;
+        display: none;
+      }
+      
+      .chapter-numeral { font-size: 48px; }
+      .chapter-title { font-size: 18px; }
+      .body-text { font-size: 15px; line-height: 1.6; }
+      .spread-meta { font-size: 12px; }
+      
+      .film-strip { width: min(90vw, 500px); }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 40vh;
+      }
+      .film-thumb { width: 50px; height: 35px; }
+    }
+
+    /* ── Medium phones: 600px and below ── */
+    @media (max-width: 600px) {
+      html, body { overflow-y: auto; }
+      body { justify-content: flex-start; padding: 16px 0; }
+      
+      .spread {
+        width: 100vw;
+        height: auto;
+        margin: 0 auto;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .book {
+        width: 100vw;
+        height: auto;
+      }
+      .book-wrap { perspective: 1200px; }
+      
+      .page {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+      
+      /* Typography scaling */
+      .chapter-eyebrow { font-size: 7px; margin-bottom: 6px; }
+      .chapter-numeral { font-size: 36px; opacity: 0.08; }
+      .chapter-title { font-size: 16px; margin-bottom: 12px; }
+      .chapter-date { font-size: 7.5px; }
+      
+      .body-text {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .spread-meta {
+        font-size: 11px;
+        margin-top: auto;
+      }
+      
+      /* Navigation buttons - larger touch targets */
+      .nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 20px;
+      }
+      .nav-btn.prev, .nav-btn.next {
+        position: fixed;
+        bottom: 24px;
+        z-index: 100;
+      }
+      .nav-btn.prev { left: 16px; }
+      .nav-btn.next { right: 16px; }
+      
+      /* Gallery modal mobile optimization */
+      .film-overlay.open {
+        display: flex;
+        align-items: flex-end;
+      }
+      .film-strip {
+        width: 100vw;
+        max-height: 95vh;
+        border-radius: 12px 12px 0 0;
+        gap: 0;
+      }
+      .film-photo-wrap {
+        min-height: 45vh;
+      }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 45vh;
+        max-width: 95vw;
+      }
+      .film-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
+      .film-arrow.left { left: -8px; }
+      .film-arrow.right { right: -8px; }
+      
+      .film-caption-text { font-size: 12px; }
+      .film-thumb { width: 45px; height: 30px; }
+      .film-thumbs-outer { padding: 8px 16px; }
+      .film-counter-num { font-size: 10px; }
+      
+      .sprocket-hole { width: 12px; height: 8px; }
+      .sprocket-row { height: 18px; padding: 0 8px; }
+    }
+
+    /* ── Small phones: 480px and below ── */
+    @media (max-width: 480px) {
+      .page { padding: 20px 12px; }
+      
+      .chapter-numeral { font-size: 28px; }
+      .chapter-title { font-size: 15px; }
+      .chapter-eyebrow { font-size: 6px; }
+      .chapter-date { font-size: 7px; }
+      
+      .body-text { font-size: 13px; }
+      .spread-meta { font-size: 10px; }
+      
+      .nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 18px;
+      }
+      
+      .film-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 42vh;
+      }
+      
+      .film-counter-label { font-size: 8px; }
+      .film-counter-num { font-size: 9px; }
+      .film-caption-badge { font-size: 7px; }
+      .film-caption-text { font-size: 11px; }
+      .film-title-tag { font-size: 7px; }
+      .film-swipe-hint { font-size: 7px; }
+    }
+
+    /* ── Portrait orientation optimizations ── */
+    @media (orientation: portrait) and (max-width: 768px) {
+      .spread {
+        height: auto;
+        min-height: 100vh;
+      }
+      .page {
+        min-height: 50vh;
+      }
+    }
+
+    /* ── Landscape phones ── */
+    @media (orientation: landscape) and (max-height: 600px) {
+      .spread { height: auto; min-height: 95vh; }
+      .page { padding: 16px 12px; min-height: auto; }
+      .chapter-numeral { font-size: 24px; }
+      .chapter-title { font-size: 14px; }
+      .body-text { font-size: 12px; }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 35vh;
+      }
+    }
+
+    /* ── Touch device optimizations ── */
+    @media (hover: none) and (pointer: coarse) {
+      .nav-btn { min-width: 48px; min-height: 48px; }
+      .film-arrow { min-width: 44px; min-height: 44px; }
+      .film-thumb { min-width: 50px; min-height: 35px; }
+      button, a { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="book-wrap">
+    <div class="book" id="book">
+
+      <!-- SPREAD 0: Departure for Tagaytay -->
+      <article class="spread stack" data-index="0">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Chapter V · Day 4</span>
+              <span class="chapter-numeral">V</span>
+              <h2 class="chapter-title">The Ascent: Bound for Tagaytay</h2>
+              <span class="chapter-date">6:30 AM · DJM Dormitory</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p class="dropcap">T<span>he morning begins with the quiet ritual of breakfast at the dorm at 6:30 AM. There is a different weight to the air today—a shift from office towers to the open ridge.</span></p>
+              <p>We leave the city behind at 8:00 AM. The bus hums as we climb the winding roads of Cavite. Through the window, the landscape stretches out, turning from grey concrete to deep, vibrant greens.</p>
+              <p>It’s a long drive, but the shared silence and the changing horizon make the distance feel like a necessary bridge between two worlds.</p>
+            </div>
+            <span class="pg-num">— 1 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">The Journey</span>
+              <div class="story-right">
+                <p>By the time the temperature drops, we know we're close. The bus slows as we approach the summit, the air now smelling of pine and damp earth.</p>
+                <p>We arrive at our first destination by 9:30 AM, stepping out into a breeze that feels like a clean break from the week's intensity.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Morning Departure"
+                     data-images='[{"src":"images/chapter5/roadtagaytay/tagaytay.jpg","caption":"The road to Tagaytay"}]'
+                     style="height:160px;">
+                  <img src="images/chapter5/roadtagaytay/tagaytay.jpg" alt="Road to Tagaytay" loading="lazy" />
+                  <span class="img-slot-label">Journey to Tagaytay</span>
+                  <span class="img-slot-caption">Manila to Tagaytay</span>
+                </div>
+                <p class="img-caption">Leaving the bustle for the ridge.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">8:00 AM · Departure</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 2 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 1: People's Park in the Sky -->
+      <article class="spread stack" data-index="1">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">The Summit</span>
+              <span class="chapter-numeral">V</span>
+              <h2 class="chapter-title">People's Park in the Sky</h2>
+              <span class="chapter-date">Mid-Morning · High Altitude</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>Standing at the edge of People's Park, the world feels expansive. The mist clings to the unfinished scaffolding of the old palace, creating an atmosphere that is both haunting and beautiful.</p>
+              <p>We wander through the view decks, looking down at the lake. From this height, everything below seems manageable, like a miniature map of our own lives. The wind is sharp, but we don't mind.</p>
+            </div>
+            <span class="pg-num">— 3 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Observation Point</span>
+              <div class="story-right">
+                <p>We capture the textures of the stone and the vastness of the horizon. It’s a moment of collective pause, a chance to simply look out without a schedule to meet.</p>
+
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="People's Park"
+                     data-images='[{"src":"images/chapter5/peoples/pip1.jpg","caption":"The unfinished palace structure"},{"src":"images/chapter5/peoples/pip2.jpg","caption":"Looking out over the ridge"},{"src":"images/chapter5/peoples/pip3.jpg","caption":"Mist and stone"},{"src":"images/chapter5/peoples/pip4.jpg","caption":"The park grounds"},{"src":"images/chapter5/peoples/pip5.jpg","caption":"View from the summit"},{"src":"images/chapter5/peoples/pip6.jpg","caption":"Park memories"}]'
+                     style="height:160px;">
+                  <img src="images/chapter5/peoples/pip1.jpg" alt="People's Park" loading="lazy" />
+                  <span class="img-slot-label">People's Park</span>
+                  <span class="img-slot-caption">The Summit</span>
+                </div>
+                <p class="img-caption">The intersection of nature and history.</p>
+              </div>
+              <div class="story-right">
+                <p>The altitude changes the way we breathe. For a while, we are just a group of students at the highest point in Cavite, feeling very small and very grateful.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Mid-Morning · Peak</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 4 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 2: Sky Ranch -->
+      <article class="spread stack" data-index="2">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">The Fairground</span>
+              <span class="chapter-numeral">V</span>
+              <h2 class="chapter-title">Sky Ranch: Optional Tour</h2>
+              <span class="chapter-date">Afternoon · Carnival Lights</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>The Sky Eye dominates the skyline as we enter Sky Ranch. It’s a shift from the quiet reflection of the park to the vibrant noise of the fairground.</p>
+              <p>The air is filled with the scent of street food and the sound of mechanical joy. Some of us brave the rides while others prefer the slower pace of the walkways, watching the Ferris wheel turn slowly against the clouds.</p>
+            </div>
+            <span class="pg-num">— 5 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Leisure</span>
+              <div class="story-right">
+                <p>We break for a packed lunch at 12:00 NN, sitting together and sharing what we’ve seen so far. There’s a lightness here that we’ve all needed.</p>
+                <p>By 2:30 PM, it's time to head back. We leave the neon and the music behind, the bus now full of people ready for the long stretch home.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Sky Ranch Sights"
+                     data-images='[{"src":"images/chapter5/skyranch/sky1.jpg","caption":"The iconic Ferris wheel"},{"src":"images/chapter5/skyranch/sky2.jpg","caption":"Street food break"},{"src":"images/chapter5/skyranch/sky3.jpg","caption":"Carnival colors"},{"src":"images/chapter5/skyranch/sky5.jpg","caption":"Ride moment"},{"src":"images/chapter5/skyranch/sky6.jpg","caption":"Fairground lights"},{"src":"images/chapter5/skyranch/sky7.jpg","caption":"Sky Ranch afternoon"}]'
+                     style="height:160px;">
+                  <img src="images/chapter5/skyranch/sky1.jpg" alt="Sky Ranch" loading="lazy" />
+                  <span class="img-slot-label">Sky Ranch</span>
+                  <span class="img-slot-caption">Fairground Adventure</span>
+                </div>
+                <p class="img-caption">Capturing the blur of the rides.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">2:30 PM · Heading Back</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 6 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 3: Return to Manila -->
+      <article class="spread stack" data-index="3">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Nightfall · Return</span>
+              <span class="chapter-numeral">V</span>
+              <h2 class="chapter-title">Back to the Base</h2>
+              <span class="chapter-date">6:30 PM · DJM Dormitory</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>The city welcomes us back with its familiar hum and glow. By 6:30 PM, we are back at the dorm for dinner, the ridge now a memory of cold wind and high views.</p>
+              <p>We eat in the shared space, the day’s fatigue setting in but the energy still high. It’s our last major group outing, and the weight of that transition is starting to feel real.</p>
+            </div>
+            <span class="pg-num">— 7 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Final Thoughts</span>
+              <div class="story-right">
+                <p>We plan for tomorrow, but for tonight, we just rest. The dorm feels different—full of the people we've become over this journey.</p>
+                <p>The lights go out, and we fall asleep to the sound of the city we've finally learned to navigate.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Evening Return"
+                     data-images='[{"src":"images/chapter5/bus/back1.jpg","caption":"Return to the dormitory"}]'
+                     style="height:180px;">
+                  <img src="images/chapter5/bus/back1.jpg" alt="Return to dorm" loading="lazy" />
+                  <span class="img-slot-label">Back to dorm</span>
+                  <span class="img-slot-caption">Evening return</span>
+                </div>
+                <p class="img-caption">Winding down after the ascent.</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">6:30 PM · Resting</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 8 —</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <button class="nav-btn" id="prevBtn">← Previous</button>
+    <button class="nav-btn" id="nextBtn">Next →</button>
+  </nav>
+
+  <!-- MODAL -->
+  <div class="film-overlay" id="filmOverlay">
+    <div class="film-strip">
+      <div class="sprocket-row top" id="topSprockets"></div>
+      <div class="film-main-frame">
+        <div class="film-counter-strip">
+          <span class="film-counter-label">35mm · Chapter V</span>
+          <span class="film-counter-num" id="filmCounter">▲ 01 / 01</span>
+        </div>
+        <div class="film-photo-wrap">
+          <button class="film-arrow left" id="filmPrev">&#8249;</button>
+          <img src="" alt="" id="filmMainImg" />
+          <div class="film-photo-vignette"></div>
+          <button class="film-arrow right" id="filmNext">&#8250;</button>
+        </div>
+        <div class="film-caption-area">
+          <span class="film-caption-text" id="filmCaption">—</span>
+        </div>
+      </div>
+      <div class="film-thumbs-outer">
+        <div class="film-thumbs" id="filmThumbs"></div>
+      </div>
+      <div class="film-close-row">
+        <span class="film-title-tag" id="filmAlbumTitle">Album</span>
+        <button class="film-close-btn" id="filmClose">Close ✕</button>
+      </div>
+      <div class="sprocket-row bottom" id="bottomSprockets"></div>
+    </div>
+  </div>
+
+  <script>
+    /* PAGE FLIP LOGIC */
+    (function(){
+      const spreads = Array.from(document.querySelectorAll('.spread.stack'));
+      let idx = 0;
+      const total = spreads.length;
+
+      (function(){
+        const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+        const start = params.get('start');
+        if(start !== null){
+          if(start === 'last') idx = Math.max(0, total - 1);
+          else {
+            const n = parseInt(start, 10);
+            if(!Number.isNaN(n)) idx = Math.max(0, Math.min(total - 1, n));
+          }
+        }
+      })();
+
+      function showIndex(i){
+        spreads.forEach((s, n)=>{
+          s.classList.remove('turning','incoming','next','hidden');
+          if(n < i) {
+            s.style.zIndex = 1; s.classList.add('hidden'); s.style.transform = 'rotateY(-180deg)';
+          } else if(n === i) {
+            s.style.zIndex = 3; s.style.transform = 'rotateY(0deg)'; s.classList.remove('hidden');
+          } else {
+            s.style.zIndex = 1; s.style.transform = 'rotateY(180deg)'; s.classList.add('hidden');
+          }
+        });
+      }
+
+      function go(delta){
+        const from = idx;
+        const to = Math.max(0, Math.min(total-1, idx + delta));
+        if(to === from) return;
+        const current = spreads[from]; const next = spreads[to];
+        next.classList.remove('hidden'); next.style.transform = 'rotateY(180deg)';
+        requestAnimationFrame(()=>{
+          current.classList.add('turning'); current.style.transform = 'rotateY(-180deg)';
+          next.classList.add('incoming'); next.style.transform = 'rotateY(0deg)';
+        });
+        setTimeout(()=>{ idx = to; showIndex(idx); }, 780);
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', ()=>{
+        if(idx === total - 1) return window.location.href = 'chapter6.html';
+        go(1);
+      });
+      document.getElementById('prevBtn').addEventListener('click', ()=>{
+        if(idx === 0) return window.location.href = 'chapter4.html#start=last';
+        go(-1);
+      });
+      showIndex(idx);
+    })();
+
+    /* MODAL LOGIC */
+    (function(){
+      const overlay = document.getElementById('filmOverlay');
+      const mainImg = document.getElementById('filmMainImg');
+      const caption = document.getElementById('filmCaption');
+      const counter = document.getElementById('filmCounter');
+      const albumTitle = document.getElementById('filmAlbumTitle');
+      const prevBtn = document.getElementById('filmPrev');
+      const nextBtn = document.getElementById('filmNext');
+      const closeBtn = document.getElementById('filmClose');
+
+      let images = []; let pos = 0;
+
+      function buildSprockets(){
+        const rows = [document.getElementById('topSprockets'), document.getElementById('bottomSprockets')];
+        rows.forEach(row => { row.innerHTML = ''; for(let i=0; i<14; i++){ let h=document.createElement('div'); h.className='sprocket-hole'; row.appendChild(h); }});
+      }
+      buildSprockets();
+
+      function updateView(){
+        const item = images[pos]; mainImg.src = item.src || ''; caption.textContent = item.caption || '—';
+        counter.textContent = `▲ ${String(pos+1).padStart(2,'0')} / ${String(images.length).padStart(2,'0')}`;
+      }
+
+      function openFilm(imgArray, title){
+        images = (imgArray || []).map(a => typeof a === 'string' ? {src: a} : a);
+        if(images.length === 0) images = [{src: '', caption: 'No images.'}];
+        pos = 0; albumTitle.textContent = title || 'Album'; updateView(); overlay.classList.add('open');
+      }
+
+      closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+      prevBtn.addEventListener('click', () => { if(pos > 0) { pos--; updateView(); }});
+      nextBtn.addEventListener('click', () => { if(pos < images.length-1) { pos++; updateView(); }});
+
+      document.querySelectorAll('.img-slot').forEach(slot => {
+        slot.addEventListener('click', () => {
+          const raw = slot.getAttribute('data-images') || '[]';
+          const title = slot.getAttribute('data-album-title') || 'Album';
+          try { openFilm(JSON.parse(raw), title); } catch(e) { openFilm([], title); }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

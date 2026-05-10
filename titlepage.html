@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Title Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:    #0E0E14;
+      --page-left:   #1C1C22;
+      --page-right:  #22222A;
+      --gold:        #B89A6A;
+      --gold-soft:   #D4BC96;
+      --gold-dim:    #8C7040;
+      --ink-bright:  #EDE8DF;
+      --ink-mid:     #C8C2B5;
+      --ink-light:   #9A9488;
+      --ink-faint:   #6A6460;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 25%, rgba(184,154,106,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 75%, rgba(184,154,106,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .spread {
+      display: flex;
+      width: min(900px, 98vw);
+      height: min(720px, 96vh);
+      box-shadow:
+        -6px 0 24px rgba(0,0,0,0.45),
+         6px 0 24px rgba(0,0,0,0.45),
+         0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-left {
+      flex: 1;
+      background: #1C1C22;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-right: 0.5px solid rgba(184,154,106,0.12);
+    }
+    .page-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 40px;
+      background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+    }
+
+    .left-quote {
+      position: relative;
+      z-index: 1;
+      max-width: 260px;
+      text-align: center;
+      padding: 0 24px;
+    }
+    .left-quote .big-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      color: var(--gold);
+      opacity: 0.18;
+      line-height: 0.6;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .left-quote p {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink-light);
+      line-height: 1.8;
+      opacity: 0.75;
+    }
+    .left-quote .attr {
+      display: block;
+      margin-top: 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    .pg-left {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .page-right {
+      flex: 1;
+      background: #22222A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 62px 52px;
+    }
+    .page-right::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 30px;
+      background: linear-gradient(to right, rgba(0,0,0,0.28), transparent);
+    }
+
+    .title-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .rule-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 28px;
+    }
+    .rule-line { flex: 1; height: 0.5px; background: var(--gold); opacity: 0.22; }
+    .rule-diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .series-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.26em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.1;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .title-ornament {
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 12px;
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+
+    .subtitle {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 280px;
+      opacity: 0.85;
+    }
+
+    .rule-bottom {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .publisher-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .pub-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
+    .pub-author {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--ink-bright);
+      opacity: 0.9;
+    }
+    .pub-course {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-top: 2px;
+    }
+    .pub-year {
+      font-family: 'EB Garamond', serif;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--ink-faint);
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .pg-right {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spread  { animation: fadeUp 0.8s ease both; }
+    .nav-bar { animation: fadeUp 0.8s 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="spread">
+
+    <div class="page-left">
+      <div class="left-quote">
+        <span class="big-quote">"</span>
+        <p>Not all classrooms have four walls. Some have glass doors, conference rooms, and strangers who become teachers without meaning to.</p>
+        <span class="attr">— on educational tours</span>
+      </div>
+      <span class="pg-left">— i —</span>
+    </div>
+
+    <div class="page-right">
+      <div class="title-content">
+
+        <p class="series-text">An Educational Tour &nbsp;·&nbsp; Industry Visit &nbsp;·&nbsp; 2025</p>
+
+        <div class="rule-top">
+          <div class="rule-line"></div>
+          <div class="rule-diamond"></div>
+          <div class="rule-line"></div>
+        </div>
+
+        <h1 class="main-title">Steps Beyond<br>the Classroom</h1>
+
+        <p class="title-ornament">— ✦ —</p>
+
+        <p class="subtitle">
+          A raw, real-time account of a student<br>
+          stepping into the professional world —<br>
+          written as if it is all happening right now.
+        </p>
+
+        <div class="rule-bottom">
+          <div class="rule-line"></div>
+          <div class="rule-diamond"></div>
+          <div class="rule-line"></div>
+        </div>
+
+        <div class="publisher-block">
+          <span class="pub-label">Written by</span>
+          <span class="pub-author">Marwina Samson</span>
+          <span class="pub-course">BS Information Technology &nbsp;·&nbsp; 2025</span>
+          <span class="pub-year">Educational Tour &amp; Industry Visit</span>
+        </div>
+
+      </div>
+      <span class="pg-right">— ii —</span>
+    </div>
+
+  </div>
+
+  <nav class="nav-bar">
+    <a class="nav-btn" href="index.html">← Cover</a>
+    <a class="nav-btn" href="dedicationpage.html">Dedication →</a>
+  </nav>
+
+</body>
+</html>

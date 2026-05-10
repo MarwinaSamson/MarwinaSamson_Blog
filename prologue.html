@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Prologue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:    #0E0E14;
+      --page-left:   #1C1C22;
+      --page-right:  #22222A;
+      --gold:        #B89A6A;
+      --gold-soft:   #D4BC96;
+      --gold-dim:    #8C7040;
+      --ink-bright:  #EDE8DF;
+      --ink-mid:     #C8C2B5;
+      --ink-light:   #9A9488;
+      --ink-faint:   #6A6460;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 25%, rgba(184,154,106,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 75%, rgba(184,154,106,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── Spread ── */
+    .spread {
+      display: flex;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      box-shadow:
+        -6px 0 24px rgba(0,0,0,0.45),
+         6px 0 24px rgba(0,0,0,0.45),
+         0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Shared page ── */
+    .page {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 52px 44px;
+      overflow: hidden;
+    }
+
+    /* ── Left page ── */
+    .page-left {
+      background: #1C1C22;
+      border-right: 0.5px solid rgba(184,154,106,0.12);
+    }
+    .page-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 38px;
+      background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Right page ── */
+    .page-right {
+      background: #22222A;
+    }
+    .page-right::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 28px;
+      background: linear-gradient(to right, rgba(0,0,0,0.28), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Chapter header (left page) ── */
+    .chapter-header {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 28px;
+    }
+
+    .chapter-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.75;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .chapter-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: 68px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.12;
+      line-height: 0.85;
+      display: block;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .chapter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .chapter-date {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .chapter-rule {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .rule-line {
+      flex: 1;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.22;
+    }
+    .rule-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+
+    /* ── Story text ── */
+    .story {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .story p {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story p:last-child { margin-bottom: 0; }
+
+    /* Drop cap on first paragraph */
+    .story p:first-child::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 58px;
+      font-style: italic;
+      color: var(--gold);
+      float: left;
+      line-height: 0.78;
+      margin-right: 6px;
+      margin-top: 8px;
+    }
+
+    /* Inline emphasis */
+    .story em {
+      font-style: italic;
+      color: var(--ink-bright);
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      position: relative;
+      z-index: 1;
+      border-left: 2px solid var(--gold);
+      padding: 10px 16px;
+      margin: 4px 0 14px;
+      background: rgba(184,154,106,0.05);
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.65;
+      margin-bottom: 0 !important;
+      text-align: left !important;
+    }
+
+    /* ── Right page continued ── */
+    .continued-label {
+      position: relative;
+      z-index: 1;
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .continued-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.22;
+    }
+
+    .story-right {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+    .story-right p {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      margin-bottom: 14px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story-right p:last-child { margin-bottom: 0; }
+    .story-right em {
+      font-style: italic;
+      color: var(--ink-bright);
+    }
+
+    /* Closing ornament */
+    .closing-ornament {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      margin-top: 18px;
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: 10px;
+      opacity: 0.45;
+    }
+
+    /* Night/time stamp detail */
+    .timestamp {
+      position: relative;
+      z-index: 1;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .timestamp-line {
+      flex: 1;
+      height: 0.5px;
+      background: var(--ink-faint);
+      opacity: 0.25;
+    }
+    .timestamp-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      opacity: 0.6;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── Page numbers ── */
+    .pg-num {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* ── Nav ── */
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spread  { animation: fadeUp 0.8s ease both; }
+    .nav-bar { animation: fadeUp 0.8s 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="spread">
+
+    <!-- ══════════════════════════════
+         LEFT PAGE — Prologue opening
+    ══════════════════════════════ -->
+    <div class="page page-left">
+
+      <div class="chapter-header">
+        <span class="chapter-eyebrow">Prologue &nbsp;·&nbsp; Day 0</span>
+        <span class="chapter-numeral">0</span>
+        <h2 class="chapter-title">"The Night Before"</h2>
+        <span class="chapter-date">The evening before it all begins</span>
+        <div class="chapter-rule">
+          <div class="rule-line"></div>
+          <div class="rule-dot"></div>
+          <div class="rule-line"></div>
+        </div>
+      </div>
+
+      <div class="story">
+        <p>My bag is packed. I check it a third time — not because I think I forgot something, but because I do not know what else to do with my hands. Tomorrow we leave early. Tomorrow is the first day of the thing we have been talking about for months, and now that it is here, I am not sure what I was expecting.</p>
+
+        <p>I sit on the edge of my bed and look at the bag by the door. It looks too small for seven days. Or maybe I am overthinking. I probably am.</p>
+
+        <div class="pull-quote">
+          <p>There is a specific kind of quiet that comes the night before something big. Not peaceful — just waiting.</p>
+        </div>
+
+        
+      </div>
+
+      <span class="pg-num">— i —</span>
+    </div>
+
+    <!-- ══════════════════════════════
+         RIGHT PAGE — Prologue continued
+    ══════════════════════════════ -->
+    <div class="page page-right">
+
+      <span class="continued-label">Continued</span>
+
+      <div class="story-right">
+        <p>My classmates and I have been together long enough that I know how each of them handles nerves. Some of them are probably still awake right now, too. Someone is definitely checking their outfit one more time. Someone else has already fallen asleep out of sheer stubbornness. I do not know which one I envy more.</p>
+
+        <p>I open my notes app and start typing — not anything in particular, just words. <em>What do I want to get out of this? What am I afraid of?</em> The answers come faster than I expect. I want to understand what it actually feels like to stand inside the world I am studying for. And I am afraid that it will feel nothing like I imagined.</p>
+
+        <p>Both of those things feel true at the same time. That seems like a good place to start.</p>
+
+        <p>I set my alarm. I close my eyes. The room is the same room it always is, but tomorrow it will be the last room I wake up in before everything begins.</p>
+
+        <p>I do not sleep for a long time.</p>
+      </div>
+
+      <div class="timestamp">
+        <div class="timestamp-line"></div>
+        <span class="timestamp-text">Written the night before · Day 0</span>
+        <div class="timestamp-line"></div>
+      </div>
+
+      <!-- <div class="closing-ornament">— ✦ —</div> -->
+
+      <span class="pg-num">— ii —</span>
+    </div>
+
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <a class="nav-btn" href="toc.html">← Contents</a>
+    <a class="nav-btn" href="chapter1.html">Chapter I →</a>
+  </nav>
+
+</body>
+</html>

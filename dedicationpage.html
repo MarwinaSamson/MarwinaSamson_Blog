@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Dedication</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:    #0E0E14;
+      --page-left:   #1C1C22;
+      --page-right:  #22222A;
+      --gold:        #B89A6A;
+      --gold-soft:   #D4BC96;
+      --gold-dim:    #8C7040;
+      --ink-bright:  #EDE8DF;
+      --ink-mid:     #C8C2B5;
+      --ink-light:   #9A9488;
+      --ink-faint:   #6A6460;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 25%, rgba(184,154,106,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 75%, rgba(184,154,106,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .spread {
+      display: flex;
+      width: min(900px, 98vw);
+      height: min(580px, 96vh);
+      box-shadow:
+        -6px 0 24px rgba(0,0,0,0.45),
+         6px 0 24px rgba(0,0,0,0.45),
+         0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Left page — Dedication */
+    .page-left {
+      flex: 1;
+      background: #1C1C22;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 52px 48px;
+      border-right: 0.5px solid rgba(184,154,106,0.12);
+    }
+    .page-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 40px;
+      background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+    }
+
+    .dedication-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 310px;
+    }
+
+    .ded-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 28px;
+      display: block;
+    }
+
+    .ded-ornament {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 10px;
+      opacity: 0.5;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .ded-to {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-light);
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
+
+    .ded-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.55;
+      margin-bottom: 22px;
+    }
+
+    .ded-body {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.9;
+      opacity: 0.85;
+      margin-bottom: 22px;
+    }
+
+    .ded-close {
+      font-family: 'EB Garamond', serif;
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--ink-light);
+      line-height: 1.75;
+      opacity: 0.75;
+    }
+
+    .ded-sig {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .sig-line {
+      width: 80px;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.35;
+      margin-bottom: 8px;
+    }
+    .sig-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--ink-bright);
+      opacity: 0.8;
+    }
+    .sig-note {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .pg-left {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    /* Right page — Epigraph */
+    .page-right {
+      flex: 1;
+      background: #22222A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 52px 52px;
+    }
+    .page-right::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 30px;
+      background: linear-gradient(to right, rgba(0,0,0,0.28), transparent);
+    }
+
+    .epigraph-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .epi-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 32px;
+      display: block;
+    }
+
+    .big-open-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 96px;
+      color: var(--gold);
+      opacity: 0.1;
+      line-height: 0.5;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .epi-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }
+
+    .epi-quote span {
+      color: var(--gold-soft);
+    }
+
+    .epi-dash {
+      width: 32px;
+      height: 0.5px;
+      background: var(--ink-light);
+      margin: 18px auto;
+      opacity: 0.3;
+    }
+
+    .epi-sub {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      opacity: 0.75;
+      margin-bottom: 20px;
+    }
+
+    .epi-attr {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* Decorative corner marks */
+    .corner {
+      position: absolute;
+      width: 18px; height: 18px;
+      border-color: rgba(184,154,106,0.22);
+      border-style: solid;
+      opacity: 0.8;
+    }
+    .corner-tl { top: 20px; left: 20px; border-width: 1px 0 0 1px; }
+    .corner-tr { top: 20px; right: 20px; border-width: 1px 1px 0 0; }
+    .corner-bl { bottom: 20px; left: 20px; border-width: 0 0 1px 1px; }
+    .corner-br { bottom: 20px; right: 20px; border-width: 0 1px 1px 0; }
+
+    .pg-right {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    /* Nav */
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spread  { animation: fadeUp 0.8s ease both; }
+    .nav-bar { animation: fadeUp 0.8s 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+  <div class="spread">
+
+    <!-- LEFT PAGE: Dedication -->
+    <div class="page-left">
+      <div class="dedication-content">
+        <span class="ded-label">Dedication</span>
+        <span class="ded-ornament">— ✦ —</span>
+
+        <p class="ded-to">For</p>
+        <p class="ded-main">
+          my batchmates, my professors,<br>
+          and everyone who made these<br>
+          seven days feel like a lifetime.
+        </p>
+
+        <p class="ded-body">
+          You laughed with me in lobbies<br>
+          I did not know how to walk through.<br>
+          You sat beside me in rooms<br>
+          that smelled of ambition and coffee.<br>
+          You whispered <em>"this is so cool"</em><br>
+          when I was too proud to say it first.
+        </p>
+
+        <p class="ded-close">
+          This is my attempt to hold on<br>
+          to every moment we were present —<br>
+          together, and wide awake.
+        </p>
+
+        <div class="ded-sig">
+          <div class="sig-line"></div>
+          <span class="sig-name">Marwina</span>
+          <span class="sig-note">2025</span>
+        </div>
+      </div>
+      <span class="pg-left">— iii —</span>
+    </div>
+
+    <!-- RIGHT PAGE: Epigraph -->
+    <div class="page-right">
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
+
+      <div class="epigraph-content">
+        <span class="epi-label">Epigraph</span>
+
+        <span class="big-open-quote">"</span>
+
+        <p class="epi-quote">
+          The real education begins<br>
+          the moment you step outside<br>
+          <span>the door you were taught in.</span>
+        </p>
+
+        <div class="epi-dash"></div>
+
+        <p class="epi-sub">
+          Seven companies.<br>
+          Seven mornings of not knowing what to expect.<br>
+          Seven evenings of knowing a little more<br>
+          about the world — and about myself.
+        </p>
+
+        <span class="epi-attr">— Industry Visit, 2025</span>
+      </div>
+
+      <span class="pg-right">— iv —</span>
+    </div>
+
+  </div>
+
+  <nav class="nav-bar">
+    <a class="nav-btn" href="titlepage.html">← Title Page</a>
+    <a class="nav-btn" href="toc.html">Table of Contents →</a>
+  </nav>
+
+</body>
+</html>

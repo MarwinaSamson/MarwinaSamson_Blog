@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Chapter I</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:    #0E0E14;
+      --page-left:   #1C1C22;
+      --page-right:  #22222A;
+      --gold:        #B89A6A;
+      --gold-soft:   #D4BC96;
+      --gold-dim:    #8C7040;
+      --ink-bright:  #EDE8DF;
+      --ink-mid:     #C8C2B5;
+      --ink-light:   #9A9488;
+      --ink-faint:   #6A6460;
+
+      /* Film palette */
+      --film-bg:    #0a0a0e;
+      --film-frame: #131318;
+      --film-border:#222228;
+      --film-hole:  #000;
+      --film-amber: #c8921a;
+      --film-text:  #d4c8a8;
+      --film-dim:   #6a6050;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 25%, rgba(184,154,106,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 75%, rgba(184,154,106,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── Spread ── */
+    .spread {
+      display: flex;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      box-shadow:
+        -6px 0 24px rgba(0,0,0,0.45),
+         6px 0 24px rgba(0,0,0,0.45),
+         0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Shared page ── */
+    .page {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 44px 50px 42px;
+      overflow: hidden;
+    }
+    .page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* ── Left page ── */
+    .page-left {
+      background: #1C1C22;
+      border-right: 0.5px solid rgba(184,154,106,0.12);
+    }
+    .page-left::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; width: 38px;
+      background: linear-gradient(to left, rgba(0,0,0,0.25), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Right page ── */
+    .page-right {
+      background: #22222A;
+    }
+    .page-right::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0; width: 28px;
+      background: linear-gradient(to right, rgba(0,0,0,0.28), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Chapter header ── */
+    .chapter-header {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 18px;
+    }
+    .chapter-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.75;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .chapter-numeral {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.1;
+      line-height: 0.85;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .chapter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+    .chapter-date {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+    .chapter-rule {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .rule-line { flex: 1; height: 0.5px; background: var(--gold); opacity: 0.22; }
+    .rule-dot  { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.4; flex-shrink: 0; }
+
+    /* ── Story text ── */
+    .story {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+    .story p {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.82;
+      margin-bottom: 12px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story p:last-child { margin-bottom: 0; }
+    .story em { font-style: italic; color: var(--ink-bright); }
+
+    /* Drop cap */
+    .story p.dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-style: italic;
+      color: var(--gold);
+      float: left;
+      line-height: 0.78;
+      margin-right: 6px;
+      margin-top: 8px;
+    }
+
+    /* Bracketed placeholders */
+    .ph {
+      font-family: 'Jost', sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: var(--gold-soft);
+      background: rgba(184,154,106,0.10);
+      border: 0.5px dashed rgba(184,154,106,0.35);
+      border-radius: 3px;
+      padding: 0px 5px;
+      letter-spacing: 0.02em;
+      font-style: normal;
+      white-space: nowrap;
+    }
+
+    /* ── IMAGE SLOT ── */
+    .img-slot {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      cursor: pointer;
+      border: 1px dashed rgba(184,154,106,0.25);
+      border-radius: 3px;
+      background: rgba(184,154,106,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-shrink: 0;
+      padding: 10px;
+      transition: border-color 0.2s, background 0.2s;
+      overflow: hidden;
+    }
+    .img-slot:hover {
+      border-color: rgba(184,154,106,0.5);
+      background: rgba(184,154,106,0.06);
+    }
+    .img-slot svg { opacity: 0.3; }
+    .img-slot-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      opacity: 0.55;
+      text-align: center;
+    }
+    .img-slot-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--ink-light);
+      opacity: 0.5;
+      text-align: center;
+    }
+    .img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
+      opacity: 0.86;
+      pointer-events: none;
+    }
+    .img-slot video {
+      pointer-events: none;
+    }
+    .img-slot.has-gallery::after {
+      content: '⬡';
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 10px;
+      color: var(--gold);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    /* ── Right page layout ── */
+    .right-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 14px;
+    }
+
+    .img-block {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .img-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11.5px;
+      font-style: italic;
+      color: var(--ink-light);
+      opacity: 0.6;
+      text-align: center;
+    }
+
+    .continued-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.55;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .continued-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.22;
+    }
+
+    .story-right {
+      flex: 1;
+    }
+    .story-right p {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: var(--ink-mid);
+      line-height: 1.82;
+      margin-bottom: 12px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .story-right p:last-child { margin-bottom: 0; }
+    .story-right em { font-style: italic; color: var(--ink-bright); }
+
+    .timestamp {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .timestamp-line { flex: 1; height: 0.5px; background: var(--ink-faint); opacity: 0.25; }
+    .timestamp-text {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--ink-faint);
+      opacity: 0.6;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ── Page numbers ── */
+    .pg-num {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.6;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* ── Nav ── */
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .spread  { animation: fadeUp 0.8s ease both; }
+    .nav-bar { animation: fadeUp 0.8s 0.3s ease both; }
+
+    /* 3D book / page flip layout */
+    .book-wrap { perspective: 1800px; }
+    .book {
+      position: relative;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      transform-style: preserve-3d;
+    }
+    .spread.stack {
+      position: absolute;
+      inset: 0;
+      transform-origin: left center;
+      backface-visibility: hidden;
+      transition: transform 700ms cubic-bezier(.2,.9,.25,1), opacity 250ms ease;
+      will-change: transform, opacity;
+    }
+    .spread.stack.hidden { opacity: 0; pointer-events: none; }
+    .spread.stack.next { transform: rotateY(180deg); }
+    .spread.stack.turning { transform: rotateY(-180deg); z-index: 2; }
+    .spread.stack.incoming { transform: rotateY(0deg); z-index: 3; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .spread.stack, .spread { transition: none !important; }
+    }
+
+    /* ══════════════════════════════════════
+       FILMSTRIP GALLERY
+       ══════════════════════════════════════ */
+
+    .film-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4,4,4,0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 280ms ease;
+    }
+    .film-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .film-strip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: min(680px, 92vw);
+      animation: filmDrop 0.35s cubic-bezier(.2,.9,.25,1) both;
+    }
+    @keyframes filmDrop {
+      from { opacity: 0; transform: translateY(-24px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0)    scale(1); }
+    }
+
+    .sprocket-row {
+      width: 100%;
+      height: 22px;
+      background: var(--film-bg);
+      border: 1px solid var(--film-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+    .sprocket-row.top { border-bottom: none; border-radius: 6px 6px 0 0; }
+    .sprocket-row.bottom { border-top: none; border-radius: 0 0 6px 6px; }
+    .sprocket-hole {
+      width: 14px; height: 10px;
+      background: var(--film-hole);
+      border-radius: 2px;
+      border: 1.5px solid #1e1e1e;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.03);
+      flex-shrink: 0;
+    }
+
+    .film-main-frame {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 8px 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .film-counter-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2px 6px;
+    }
+    .film-counter-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      color: var(--film-amber);
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+    .film-counter-num {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--film-amber);
+    }
+    .film-exposure-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .film-exposure-dots span {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--film-amber);
+      opacity: 0.25;
+      transition: opacity 0.2s;
+    }
+    .film-exposure-dots span.active { opacity: 0.9; }
+
+    .film-photo-wrap {
+      position: relative;
+      width: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .film-photo-wrap img {
+      max-width: 100%;
+      max-height: 55vh;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      transition: opacity 0.22s ease;
+    }
+    .film-photo-wrap img[hidden] { display: none !important; }
+    .film-photo-wrap img.fading { opacity: 0; }
+
+    .film-photo-wrap video {
+      max-width: 100%;
+      max-height: 55vh;
+      width: auto;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      transition: opacity 0.22s ease;
+      background: #000;
+    }
+    .film-photo-wrap video[hidden] { display: none !important; }
+    .film-photo-wrap video.fading { opacity: 0; }
+    .film-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,0.55);
+      border: 0.5px solid rgba(200,146,26,0.25);
+      border-radius: 50%;
+      color: var(--film-amber);
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.18s, border-color 0.18s;
+      line-height: 1;
+    }
+    .film-arrow:hover { background: rgba(200,146,26,0.22); border-color: rgba(200,146,26,0.6); }
+    .film-arrow.left  { left: -18px; }
+    .film-arrow.right { right: -18px; }
+
+    .film-caption-area {
+      padding: 8px 2px 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .film-caption-badge {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--film-amber);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+    .film-caption-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--film-text);
+      opacity: 0.75;
+      line-height: 1.4;
+    }
+
+    .film-divider {
+      width: 100%;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--film-bg) 0px, var(--film-bg) 6px,
+        var(--film-border) 6px, var(--film-border) 7px
+      );
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+    }
+
+    .film-thumbs-outer {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 8px 28px;
+      overflow: hidden;
+    }
+    .film-thumbs {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+    .film-thumbs::-webkit-scrollbar { display: none; }
+
+    .film-thumb {
+      flex-shrink: 0;
+      width: 60px; height: 40px;
+      background: #1c1c1c;
+      border: 1.5px solid transparent;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.18s, opacity 0.18s;
+      opacity: 0.5;
+    }
+    .film-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; background: #111; }
+    .film-thumb.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      color: var(--film-dim);
+      letter-spacing: 0.08em;
+    }
+    .film-thumb:hover { opacity: 0.8; }
+    .film-thumb.active { border-color: var(--gold); opacity: 1; }
+    .film-thumb::after {
+      content: attr(data-num);
+      position: absolute;
+      bottom: 2px; right: 3px;
+      font-family: 'Jost', sans-serif;
+      font-size: 7px;
+      font-weight: 300;
+      color: rgba(200,146,26,0.7);
+      letter-spacing: 0.05em;
+    }
+
+    .film-close-row {
+      width: 100%;
+      background: var(--film-bg);
+      border-left: 1px solid var(--film-border);
+      border-right: 1px solid var(--film-border);
+      padding: 0 28px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .film-close-btn {
+      font-family: 'Jost', sans-serif;
+      font-size: 8.5px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+      background: none;
+      border: 0.5px solid var(--film-border);
+      padding: 5px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .film-close-btn:hover { color: var(--gold-soft); border-color: var(--gold); }
+    .film-title-tag {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+    }
+    .film-swipe-hint {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--film-dim);
+      opacity: 0.55;
+    }
+
+    .film-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.35;
+    }
+    .film-photo-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.45) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE RESPONSIVENESS
+       ══════════════════════════════════════ */
+
+    /* ── Tablets: 768px and below ── */
+    @media (max-width: 768px) {
+      .spread {
+        width: min(100vw, 95vw);
+        height: auto;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      }
+      .book {
+        width: min(100vw, 95vw);
+        height: auto;
+      }
+      .page {
+        padding: 32px 28px;
+        min-height: 60vh;
+      }
+      .page-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(184,154,106,0.12);
+      }
+      .page-left::after {
+        width: 0;
+        display: none;
+      }
+      .page-right::after {
+        width: 0;
+        display: none;
+      }
+      
+      .chapter-numeral { font-size: 48px; }
+      .chapter-title { font-size: 18px; }
+      .body-text { font-size: 15px; line-height: 1.6; }
+      .spread-meta { font-size: 12px; }
+      
+      .film-strip { width: min(90vw, 500px); }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 40vh;
+      }
+      .film-thumb { width: 50px; height: 35px; }
+    }
+
+    /* ── Medium phones: 600px and below ── */
+    @media (max-width: 600px) {
+      html, body { overflow-y: auto; }
+      body { justify-content: flex-start; padding: 16px 0; }
+      
+      .spread {
+        width: 100vw;
+        height: auto;
+        margin: 0 auto;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .book {
+        width: 100vw;
+        height: auto;
+      }
+      .book-wrap { perspective: 1200px; }
+      
+      .page {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+      
+      /* Typography scaling */
+      .chapter-eyebrow { font-size: 7px; margin-bottom: 6px; }
+      .chapter-numeral { font-size: 36px; opacity: 0.08; }
+      .chapter-title { font-size: 16px; margin-bottom: 12px; }
+      .chapter-date { font-size: 7.5px; }
+      
+      .body-text {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .spread-meta {
+        font-size: 11px;
+        margin-top: auto;
+      }
+      
+      /* Navigation buttons - larger touch targets */
+      .nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 20px;
+      }
+      .nav-btn.prev, .nav-btn.next {
+        position: fixed;
+        bottom: 24px;
+        z-index: 100;
+      }
+      .nav-btn.prev { left: 16px; }
+      .nav-btn.next { right: 16px; }
+      
+      /* Gallery modal mobile optimization */
+      .film-overlay.open {
+        display: flex;
+        align-items: flex-end;
+      }
+      .film-strip {
+        width: 100vw;
+        max-height: 95vh;
+        border-radius: 12px 12px 0 0;
+        gap: 0;
+      }
+      .film-photo-wrap {
+        min-height: 45vh;
+      }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 45vh;
+        max-width: 95vw;
+      }
+      .film-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+      }
+      .film-arrow.left { left: -8px; }
+      .film-arrow.right { right: -8px; }
+      
+      .film-caption-text { font-size: 12px; }
+      .film-thumb { width: 45px; height: 30px; }
+      .film-thumbs-outer { padding: 8px 16px; }
+      .film-counter-num { font-size: 10px; }
+      
+      .sprocket-hole { width: 12px; height: 8px; }
+      .sprocket-row { height: 18px; padding: 0 8px; }
+    }
+
+    /* ── Small phones: 480px and below ── */
+    @media (max-width: 480px) {
+      .page { padding: 20px 12px; }
+      
+      .chapter-numeral { font-size: 28px; }
+      .chapter-title { font-size: 15px; }
+      .chapter-eyebrow { font-size: 6px; }
+      .chapter-date { font-size: 7px; }
+      
+      .body-text { font-size: 13px; }
+      .spread-meta { font-size: 10px; }
+      
+      .nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 18px;
+      }
+      
+      .film-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+      
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 42vh;
+      }
+      
+      .film-counter-label { font-size: 8px; }
+      .film-counter-num { font-size: 9px; }
+      .film-caption-badge { font-size: 7px; }
+      .film-caption-text { font-size: 11px; }
+      .film-title-tag { font-size: 7px; }
+      .film-swipe-hint { font-size: 7px; }
+    }
+
+    /* ── Portrait orientation optimizations ── */
+    @media (orientation: portrait) and (max-width: 768px) {
+      .spread {
+        height: auto;
+        min-height: 100vh;
+      }
+      .page {
+        min-height: 50vh;
+      }
+    }
+
+    /* ── Landscape phones ── */
+    @media (orientation: landscape) and (max-height: 600px) {
+      .spread { height: auto; min-height: 95vh; }
+      .page { padding: 16px 12px; min-height: auto; }
+      .chapter-numeral { font-size: 24px; }
+      .chapter-title { font-size: 14px; }
+      .body-text { font-size: 12px; }
+      .film-photo-wrap img,
+      .film-photo-wrap video {
+        max-height: 35vh;
+      }
+    }
+
+    /* ── Touch device optimizations ── */
+    @media (hover: none) and (pointer: coarse) {
+      .nav-btn { min-width: 48px; min-height: 48px; }
+      .film-arrow { min-width: 44px; min-height: 44px; }
+      .film-thumb { min-width: 50px; min-height: 35px; }
+      button, a { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="book-wrap">
+    <div class="book" id="book">
+
+      <!-- SPREAD 0: Leaving house → Airport -->
+      <article class="spread stack" data-index="0">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Chapter I · Day 0 (Arrival)</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Departure: The Journey Begins!</h2>
+              <span class="chapter-date">3:00 AM · Leaving the house</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p class="dropcap">My alarm goes off at 3:00 AM. For a second I just lie there, listening to the sound of a house that does not know yet that today is different.</p>
+              <p>We leave the house at <span class="ph">[time you left]</span>. The streets are empty and everything feels like it belongs to us. Aunt and cousin help with bags. I keep checking my phone for the boarding pass that is already there.</p>
+              <p>We leave the house at <span class="ph">[time you left]</span>. The streets are empty and everything feels like it belongs to us. Aunt and cousin help with bags. I keep checking my phone for the boarding pass that is already there.</p>
+            </div>
+            <span class="pg-num">— 1 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Continued</span>
+              <div class="story-right">
+                <p>We arrive at the airport. Lights are bright, and the terminal hums with people moving to different lives. I breathe like this is a small, private ceremony.</p>
+                <p>Check-in, security, and waiting — time moves strangely at airports.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Departure · Leaving House → Airport"
+                     data-images='[{"src":"images/chapter1/departure/ch1-1.jpg","caption":"Departure photo 1"},{"src":"images/chapter1/departure/ch1-2.jpg","caption":"Departure photo 2"},{"src":"images/chapter1/departure/ch1-3.jpg","caption":"Departure photo 3"},{"src":"images/chapter1/departure/ch1-4.jpg","caption":"Departure photo 4"},{"src":"images/chapter1/departure/ch1-5.jpg","caption":"Departure photo 5"},{"src":"images/chapter1/departure/ch1-7.jpg","caption":"Departure photo 6"}]'
+                     style="height:160px;">
+                  <img src="images/chapter1/departure/ch1-1.jpg" alt="Departure photo 1" loading="lazy" />
+                  <span class="img-slot-label">Departure album · click to open filmstrip</span>
+                  <span class="img-slot-caption">Departure photos · <span class="ph">Leaving house → Airport</span></span>
+                </div>
+                <p class="img-caption">Departure: leaving the house and heading to the airport</p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Day 0 · Arrival</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 2 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 1: Arrival NAIA → Meet DJM → Dorm -->
+      <article class="spread stack" data-index="1">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Arrival · NAIA</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Meeting DJM & the Dorm</h2>
+              <span class="chapter-date">NAIA · Afternoon</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>We meet the DJM representative who will guide our tour. They are older, precise, and carry the kind of calm that makes itineraries happen. They lead us to the dorm where we'll stay for the week.</p>
+              <p>The dorm smells faintly of detergent and travel. Bunk beds, shared sinks, new roommates introductions — the kind of small rituals that feel like the start of something.</p>
+            </div>
+            <span class="pg-num">— 3 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Accommodations</span>
+              <div class="story-right">
+                <p>We unpack one small bag each. A map on the wall shows the city like a promise. Someone discovers a stray charger and becomes a hero.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="DJM & Dorm"
+                     data-images='[{"src":"images/chapter1/meetingdjm/djmbus.mp4","caption":"DJM bus ride video","type":"video"},{"src":"images/chapter1/meetingdjm/Baggage retrival.jpg","caption":"DJM meeting photo 1"}]'
+                     style="height:160px;">
+                  <img src="images/chapter1/meetingdjm/Baggage retrival.jpg" alt="DJM meeting photo 1" loading="lazy" />
+                  <span class="img-slot-label">Insert dorm / DJM photo</span>
+                  <span class="img-slot-caption"><span class="ph">[Dorm name or DJM rep]</span></span>
+                </div>
+                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Arrival · Dorm</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 4 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 2: Luneta Park -->
+      <article class="spread stack" data-index="2">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Day 0 · Afternoon</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Luneta Park</h2>
+              <span class="chapter-date">Sightseeing · Free Day</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>Luneta smells of grass and roasted peanuts. We walk under a blue sky and the monument looks both smaller and larger than I expected. There are vendors and old men feeding pigeons and the city feels kindly.</p>
+            </div>
+            <span class="pg-num">— 5 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Wander</span>
+              <div class="story-right">
+                <p>I take a photo of a street performer. Someone laughs at a silly joke. The day is soft and we have nowhere urgent to be.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Luneta Park"
+                     data-images='[{"src":"images/chapter1/luneta/luneta1.jpg","caption":"Luneta photo 1"},{"src":"images/chapter1/luneta/luneta2.jpg","caption":"Luneta photo 2"},{"src":"images/chapter1/luneta/luneta3.jpg","caption":"Luneta photo 3"},{"src":"images/chapter1/luneta/luneta4.jpg","caption":"Luneta photo 4"},{"src":"images/chapter1/luneta/luneta5.jpg","caption":"Luneta photo 5"}]'
+                     style="height:180px;">
+                  <img src="images/chapter1/luneta/luneta1.jpg" alt="Luneta photo 1" loading="lazy" />
+                  <span class="img-slot-label">Insert Luneta photo</span>
+                  <span class="img-slot-caption"><span class="ph">[Luneta / Rizal Park]</span></span>
+                </div>
+                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Luneta · Day 0</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 6 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 3: Intramuros -->
+      <article class="spread stack" data-index="3">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Day 0 · Afternoon</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Intramuros</h2>
+              <span class="chapter-date">Walled City · Walking</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>Intramuros feels like a pocket of another century. Old stone, narrow streets, horses, and tourists with cameras. We tramp along and learn the contours of history in footsteps.</p>
+            </div>
+            <span class="pg-num">— 7 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Explore</span>
+              <div class="story-right">
+                <p>We enter a small museum and someone points at an old photograph, saying 'my grandmother had that dress'. It feels like the city folds into our family stories for a moment.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Intramuros"
+                     data-images='[{"src":"images/chapter1/intramuros/intramuros1.jpg","caption":"Intramuros photo 1"},{"src":"images/chapter1/intramuros/intramuros2.jpg","caption":"Intramuros photo 2"},{"src":"images/chapter1/intramuros/intramuros3.jpg","caption":"Intramuros photo 3"},{"src":"images/chapter1/intramuros/intramoros4.jpg","caption":"Intramuros photo 4"}]'
+                     style="height:180px;">
+                  <img src="images/chapter1/intramuros/intramuros1.jpg" alt="Intramuros photo 1" loading="lazy" />
+                  <span class="img-slot-label">Insert Intramuros photo</span>
+                  <span class="img-slot-caption"><span class="ph">[Intramuros]</span></span>
+                </div>
+                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Intramuros · Day 0</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 8 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 4: Manila Cathedral -->
+      <article class="spread stack" data-index="4">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Day 0 · Late Afternoon</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Manila Cathedral</h2>
+              <span class="chapter-date">Quiet · Small Crowds</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>The cathedral is cool and smells faintly of wax. We walk in quietly, shoeless in some corners, and I feel the hush of people thinking their private prayers.</p>
+            </div>
+            <span class="pg-num">— 9 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Stillness</span>
+              <div class="story-right">
+                <p>A bell rings somewhere and we all look up. For a while we are very small and grateful to be small.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Manila Cathedral"
+                     data-images='[{"src":"images/chapter1/manilacathedral/mnlcathedral1.jpg","caption":"Manila Cathedral photo 1"},{"src":"images/chapter1/manilacathedral/mnlcathed2.webp","caption":"Manila Cathedral photo 2"},{"src":"images/chapter1/manilacathedral/mnlcathed3.jpg","caption":"Manila Cathedral photo 3"}]'
+                     style="height:160px;">
+                  <img src="images/chapter1/manilacathedral/mnlcathedral1.jpg" alt="Manila Cathedral photo 1" loading="lazy" />
+                  <span class="img-slot-label">Insert Manila Cathedral photo</span>
+                  <span class="img-slot-caption"><span class="ph">[Manila Cathedral]</span></span>
+                </div>
+                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Manila Cathedral · Day 0</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 10 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 5: SM Mall of Asia (MOA) -->
+      <article class="spread stack" data-index="5">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Day 0 · Evening</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Mall of Asia</h2>
+              <span class="chapter-date">Sea breeze · Neon</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>MOA is loud and bright. We eat something greasy and walk by the bay. There is ferris wheel light and a salty wind and the city feels larger than it did that morning.</p>
+            </div>
+            <span class="pg-num">— 11 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Evening</span>
+              <div class="story-right">
+                <p>We buy souvenirs. Someone takes a picture of the sunset and it looks like a postcard. I keep thinking about how much can fit into one day.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Mall of Asia · Sunset"
+                     data-images='[{"src":"images/chapter1/moa/moa1.jpg","caption":"MOA photo 1"},{"src":"images/chapter1/moa/moa2.jpg","caption":"MOA photo 2"},{"src":"images/chapter1/moa/moa3.jpg","caption":"MOA photo 3"}]'
+                     style="height:180px;">
+                  <img src="images/chapter1/moa/moa1.jpg" alt="MOA photo 1" loading="lazy" />
+                  <span class="img-slot-label">Insert MOA photo</span>
+                  <span class="img-slot-caption"><span class="ph">[MOA / Bay]</span></span>
+                </div>
+                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">MOA · Sunset</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 12 —</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- SPREAD 6: Return to Dorm -->
+      <article class="spread stack" data-index="6">
+        <div class="spread-inner" style="display:flex; height:100%;">
+          <div class="page page-left">
+            <div class="chapter-header">
+              <span class="chapter-eyebrow">Night · Return</span>
+              <span class="chapter-numeral">I</span>
+              <h2 class="chapter-title">Back to the Dorm</h2>
+              <span class="chapter-date">Night · Rest</span>
+              <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
+            </div>
+            <div class="story">
+              <p>We come back tired and full. People share earbuds and stories. For a moment in the dark corridor I think this is the first time of many first times.</p>
+            </div>
+            <span class="pg-num">— 13 —</span>
+          </div>
+          <div class="page page-right">
+            <div class="right-inner">
+              <span class="continued-label">Pause</span>
+              <div class="story-right">
+                <p>We plan for the week ahead and fall asleep with the window open. Tomorrow will be companies, presentations, and schedules, but tonight the city is ours.</p>
+              </div>
+              <div class="img-block">
+                <div class="img-slot has-gallery"
+                     data-album-title="Dorm · Night"
+                     data-images='[{"src":"images/chapter1/backtodorm/back1.jpg","caption":"Return to dormitory · Evening"},{"src":"images/chapter1/backtodorm/back2.jpg","caption":"Night at the dorm"}]'
+                     style="height:160px;">
+                  <img src="images/chapter1/backtodorm/back1.jpg" alt="Dorm night" loading="lazy" />
+                  <span class="img-slot-label">Back to dorm · Night</span>
+                  <span class="img-slot-caption">Evening at DJM Dormitory</span>
+                </div>
+                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+              </div>
+              <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Night · Return</span><div class="timestamp-line"></div></div>
+            </div>
+            <span class="pg-num">— 14 —</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <button class="nav-btn" id="prevBtn">← Previous</button>
+    <button class="nav-btn" id="nextBtn">Next →</button>
+  </nav>
+
+  <!-- FILMSTRIP GALLERY MODAL -->
+  <div class="film-overlay" id="filmOverlay" role="dialog" aria-modal="true" aria-label="Photo filmstrip">
+    <div class="film-strip" id="filmStrip">
+      <div class="sprocket-row top" id="topSprockets"></div>
+      <div class="film-main-frame">
+        <div class="film-counter-strip">
+          <span class="film-counter-label">35mm · Chapter I</span>
+          <span class="film-counter-num" id="filmCounter">▲ 01 / 01</span>
+          <div class="film-exposure-dots" id="filmDots"></div>
+        </div>
+        <div class="film-photo-wrap">
+          <button class="film-arrow left" id="filmPrev">&#8249;</button>
+          <img src="" alt="" id="filmMainImg" />
+          <video id="filmMainVideo" controls playsinline hidden></video>
+          <div class="film-photo-vignette"></div>
+          <button class="film-arrow right" id="filmNext">&#8250;</button>
+        </div>
+        <div class="film-caption-area">
+          <span class="film-caption-badge">Caption</span>
+          <span class="film-caption-text" id="filmCaption">—</span>
+        </div>
+      </div>
+      <div class="film-divider"></div>
+      <div class="film-thumbs-outer">
+        <div class="film-thumbs" id="filmThumbs"></div>
+      </div>
+      <div class="film-close-row">
+        <span class="film-title-tag" id="filmAlbumTitle">Album</span>
+        <span class="film-swipe-hint">← → keys or arrows</span>
+        <button class="film-close-btn" id="filmClose">Close ✕</button>
+      </div>
+      <div class="sprocket-row bottom" id="bottomSprockets"></div>
+    </div>
+  </div>
+
+ 
+  <script>
+    (function(){
+      const spreads = Array.from(document.querySelectorAll('.spread.stack'));
+      let idx = 0;
+      const total = spreads.length;
+
+      (function(){
+        const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+        const start = params.get('start');
+        if(start !== null){
+          if(start === 'last') idx = Math.max(0, total - 1);
+          else {
+            const n = parseInt(start, 10);
+            if(!Number.isNaN(n)) idx = Math.max(0, Math.min(total - 1, n));
+          }
+        }
+      })();
+
+      function showIndex(i){
+        spreads.forEach((s, n)=>{
+          s.classList.remove('turning','incoming','next','hidden');
+          if(n < i) {
+            s.style.zIndex = 1;
+            s.classList.add('hidden');
+            s.style.transform = 'rotateY(-180deg)';
+          } else if(n === i) {
+            s.style.zIndex = 3;
+            s.style.transform = 'rotateY(0deg)';
+            s.classList.remove('hidden');
+          } else {
+            s.style.zIndex = 1;
+            s.style.transform = 'rotateY(180deg)';
+            s.classList.add('hidden');
+          }
+        });
+      }
+
+      function go(delta){
+        const from = idx;
+        const to = Math.max(0, Math.min(total-1, idx + delta));
+        if(to === from) return;
+        const current = spreads[from];
+        const next = spreads[to];
+        next.classList.remove('hidden');
+        next.style.transform = 'rotateY(180deg)';
+        requestAnimationFrame(()=>{
+          current.classList.add('turning');
+          current.style.transform = 'rotateY(-180deg)';
+          next.classList.add('incoming');
+          next.style.transform = 'rotateY(0deg)';
+        });
+        setTimeout(()=>{ idx = to; showIndex(idx); }, 780);
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', ()=>{
+        if(idx === total - 1) return window.location.href = 'chapter2.html';
+        go(1);
+      });
+      document.getElementById('prevBtn').addEventListener('click', ()=>{
+        if(idx === 0) return window.location.href = 'prologue.html';
+        go(-1);
+      });
+
+      window.addEventListener('keydown', (e)=>{
+        if(document.getElementById('filmOverlay').classList.contains('open')) return;
+        if(e.key === 'ArrowRight'){ if(idx === total - 1) return window.location.href = 'chapter2.html'; go(1); }
+        if(e.key === 'ArrowLeft') go(-1);
+      });
+
+      showIndex(idx);
+    })();
+  </script>
+
+  <!-- FILMSTRIP GALLERY SCRIPT -->
+  <script>
+    (function(){
+      const overlay   = document.getElementById('filmOverlay');
+      const mainImg   = document.getElementById('filmMainImg');
+      const mainVideo = document.getElementById('filmMainVideo');
+      const caption   = document.getElementById('filmCaption');
+      const counter   = document.getElementById('filmCounter');
+      const dotsEl    = document.getElementById('filmDots');
+      const thumbsEl  = document.getElementById('filmThumbs');
+      const albumTitle= document.getElementById('filmAlbumTitle');
+      const prevBtn   = document.getElementById('filmPrev');
+      const nextBtn   = document.getElementById('filmNext');
+      const closeBtn  = document.getElementById('filmClose');
+      const topRow    = document.getElementById('topSprockets');
+      const botRow    = document.getElementById('bottomSprockets');
+
+      let images = [];
+      let pos = 0;
+      const NUM_HOLES = 14;
+
+      function buildSprockets(){
+        [topRow, botRow].forEach(row => {
+          row.innerHTML = '';
+          for(let i = 0; i < NUM_HOLES; i++){
+            const h = document.createElement('div');
+            h.className = 'sprocket-hole';
+            row.appendChild(h);
+          }
+        });
+      }
+      buildSprockets();
+
+      function buildDots(total){
+        dotsEl.innerHTML = '';
+        const count = Math.min(total, 8);
+        for(let i = 0; i < count; i++){
+          const d = document.createElement('span');
+          dotsEl.appendChild(d);
+        }
+      }
+
+      function updateDots(){
+        const dotSpans = dotsEl.querySelectorAll('span');
+        const visiblePos = Math.min(pos, dotSpans.length - 1);
+        dotSpans.forEach((d, i) => d.classList.toggle('active', i === visiblePos));
+      }
+
+      function buildThumbs(){
+        thumbsEl.innerHTML = '';
+        images.forEach((img, i) => {
+          const t = document.createElement('div');
+          t.className = 'film-thumb' + (img.src ? '' : ' empty');
+          t.setAttribute('data-num', String(i+1).padStart(2,'0'));
+          if(img.src){
+            if((img.type || '').toLowerCase() === 'video'){
+              t.classList.add('empty');
+              t.textContent = 'VIDEO';
+            } else {
+              const im = document.createElement('img');
+              im.src = img.src;
+              im.alt = img.caption || '';
+              im.loading = 'lazy';
+              t.appendChild(im);
+            }
+          } else {
+            t.textContent = '—';
+          }
+          t.addEventListener('click', () => goto(i));
+          thumbsEl.appendChild(t);
+        });
+      }
+
+      function getFallbackImage(startIndex){
+        for(let i = Math.max(0, startIndex || 0); i < images.length; i++){
+          if((images[i].type || '').toLowerCase() !== 'video') return images[i];
+        }
+        for(let i = 0; i < images.length; i++){
+          if((images[i].type || '').toLowerCase() !== 'video') return images[i];
+        }
+        return images[0] || { src: '', caption: 'No images in this album yet.' };
+      }
+
+      function scrollThumb(i){
+        const thumbs = thumbsEl.querySelectorAll('.film-thumb');
+        if(thumbs[i]) thumbs[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        thumbs.forEach((t, n) => t.classList.toggle('active', n === i));
+      }
+
+      function goto(i){
+        pos = Math.max(0, Math.min(images.length - 1, i));
+        const item = images[pos];
+        const canShowVideo = !!mainVideo && (item.type || '').toLowerCase() === 'video';
+        mainImg.classList.add('fading');
+        if(mainVideo) mainVideo.classList.add('fading');
+        setTimeout(() => {
+          if(canShowVideo){
+            mainImg.hidden = true;
+            mainImg.removeAttribute('src');
+            mainVideo.hidden = false;
+            mainVideo.pause();
+            mainVideo.src = item.src || '';
+            mainVideo.load();
+          } else {
+            if(mainVideo){
+              mainVideo.pause();
+              mainVideo.hidden = true;
+              mainVideo.removeAttribute('src');
+            }
+            mainImg.hidden = false;
+            mainImg.src = canShowVideo ? (getFallbackImage(pos).src || '') : (item.src || '');
+            mainImg.alt = item.caption || '';
+          }
+          caption.textContent = item.caption || '—';
+          counter.textContent = `▲ ${String(pos+1).padStart(2,'0')} / ${String(images.length).padStart(2,'0')}`;
+          mainImg.classList.remove('fading');
+          if(mainVideo) mainVideo.classList.remove('fading');
+        }, 150);
+        updateDots();
+        scrollThumb(pos);
+      }
+
+      function openFilm(imgArray, start, title){
+        images = (imgArray || []).map(a => typeof a === 'string' ? { src: a } : a);
+        if(images.length === 0) images = [{ src: '', caption: 'No images in this album yet.' }];
+        pos = Math.max(0, Math.min(start || 0, images.length - 1));
+        albumTitle.textContent = title || 'Album';
+        buildDots(images.length);
+        buildThumbs();
+        const item = images[pos];
+        const canShowVideo = !!mainVideo && (item.type || '').toLowerCase() === 'video';
+        if(canShowVideo){
+          mainImg.hidden = true;
+          mainVideo.hidden = false;
+          mainVideo.src = item.src || '';
+          mainVideo.load();
+        } else {
+          if(mainVideo) mainVideo.hidden = true;
+          mainImg.hidden = false;
+          mainImg.src = canShowVideo ? (getFallbackImage(0).src || '') : (item.src || '');
+          mainImg.alt = item.caption || '';
+        }
+        caption.textContent = item.caption || '—';
+        counter.textContent = `▲ ${String(pos+1).padStart(2,'0')} / ${String(images.length).padStart(2,'0')}`;
+        updateDots();
+        scrollThumb(pos);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeFilm(){
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      prevBtn.addEventListener('click', () => goto(pos - 1));
+      nextBtn.addEventListener('click', () => goto(pos + 1));
+      closeBtn.addEventListener('click', closeFilm);
+      overlay.addEventListener('click', e => { if(e.target === overlay) closeFilm(); });
+
+      window.addEventListener('keydown', e => {
+        if(!overlay.classList.contains('open')) return;
+        if(e.key === 'Escape')      closeFilm();
+        if(e.key === 'ArrowLeft')   goto(pos - 1);
+        if(e.key === 'ArrowRight')  goto(pos + 1);
+      });
+
+      let touchStartX = null;
+      mainImg.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      mainImg.addEventListener('touchend', e => {
+        if(touchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if(Math.abs(dx) > 40) goto(pos + (dx < 0 ? 1 : -1));
+        touchStartX = null;
+      });
+
+      document.querySelectorAll('.img-slot').forEach(slot => {
+        slot.addEventListener('click', () => {
+          const raw = slot.getAttribute('data-images') || '';
+          const title = slot.getAttribute('data-album-title') || 'Album';
+          let arr;
+          if(!raw.trim()){
+            arr = [];
+          } else {
+            try { arr = JSON.parse(raw); }
+            catch(e){ arr = raw.split(',').map(s => s.trim()).filter(Boolean); }
+          }
+          openFilm(arr, 0, title);
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — Epilogue</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-outer:    #0E0E14;
+      --page-left:   #1C1C22;
+      --page-right:  #22222A;
+      --gold:         #B89A6A;
+      --gold-soft:   #D4BC96;
+      --gold-dim:    #8C7040;
+      --ink-bright:  #EDE8DF;
+      --ink-mid:     #C8C2B5;
+      --ink-light:   #9A9488;
+      --ink-faint:   #6A6460;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: #0E0E14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'EB Garamond', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(184,154,106,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .spread {
+      display: flex;
+      width: min(940px, 98vw);
+      height: min(720px, 96vh);
+      box-shadow: 0 12px 48px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 1s ease both;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+    }
+
+    .spread.closing-book {
+      animation: bookClose 1.35s ease-in-out forwards;
+    }
+
+    .spread.closing-book::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(0,0,0,0.42) 50%, rgba(0,0,0,0.18));
+      opacity: 0;
+      animation: spineFade 1.35s ease-in-out forwards;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .page {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 60px 70px;
+      background: #1C1C22;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    .page-left {
+      transform-origin: right center;
+    }
+
+    .page-right {
+      background: #22222A;
+      transform-origin: left center;
+    }
+
+    .epilogue-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .epilogue-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .epilogue-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-style: italic;
+      color: var(--ink-bright);
+    }
+
+    .story p {
+      font-size: 16px;
+      color: var(--ink-mid);
+      line-height: 1.9;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .sig-block {
+      margin-top: 40px;
+      text-align: right;
+    }
+
+    .sig-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-style: italic;
+      color: var(--gold-soft);
+      display: block;
+    }
+
+    .sig-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: var(--ink-light);
+      text-transform: uppercase;
+    }
+
+    .final-ornament {
+      margin: 40px auto;
+      width: 60px;
+      height: 1px;
+      background: var(--gold-dim);
+      position: relative;
+    }
+
+    .final-ornament::after {
+      content: '⬡';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #22222A;
+      padding: 0 10px;
+      color: var(--gold);
+      font-size: 12px;
+    }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .nav-btn {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      background: rgba(28,28,34,0.92);
+      border: 0.5px solid rgba(184,154,106,0.3);
+      border-radius: 2px;
+      padding: 8px 22px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(184,154,106,0.12);
+      border-color: rgba(184,154,106,0.6);
+      color: var(--ink-bright);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bookClose {
+      0% {
+        transform: perspective(1800px) rotateX(0deg) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: perspective(1800px) rotateX(2deg) scale(0.985);
+        opacity: 1;
+      }
+    }
+
+    @keyframes leftPageClose {
+      0%   { transform: rotateY(0deg); }
+      35%  { transform: rotateY(32deg); }
+      70%  { transform: rotateY(74deg); }
+      100% { transform: rotateY(96deg); }
+    }
+
+    @keyframes rightPageClose {
+      0%   { transform: rotateY(0deg); }
+      35%  { transform: rotateY(-32deg); }
+      70%  { transform: rotateY(-74deg); }
+      100% { transform: rotateY(-96deg); }
+    }
+
+    @keyframes spineFade {
+      0%   { opacity: 0; }
+      20%  { opacity: 0.15; }
+      60%  { opacity: 0.45; }
+      100% { opacity: 0.68; }
+    }
+
+    .spread.closing-book .page-left {
+      animation: leftPageClose 1.35s ease-in-out forwards;
+    }
+
+    .spread.closing-book .page-right {
+      animation: rightPageClose 1.35s ease-in-out forwards;
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE RESPONSIVENESS
+       ══════════════════════════════════════ */
+
+    /* ── Tablets: 768px and below ── */
+    @media (max-width: 768px) {
+      .spread {
+        width: min(100vw, 95vw);
+        height: auto;
+        flex-direction: column;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      }
+      .book {
+        width: min(100vw, 95vw);
+        height: auto;
+      }
+      .page {
+        padding: 32px 28px;
+        min-height: 60vh;
+      }
+      .page-left {
+        border-right: none;
+        border-bottom: 1px solid rgba(184,154,106,0.12);
+      }
+      .page-left::after {
+        width: 0;
+        display: none;
+      }
+      .page-right::after {
+        width: 0;
+        display: none;
+      }
+      
+      .chapter-title { font-size: 18px; }
+      .body-text { font-size: 15px; line-height: 1.6; }
+      .spread-meta { font-size: 12px; }
+    }
+
+    /* ── Medium phones: 600px and below ── */
+    @media (max-width: 600px) {
+      html, body { overflow-y: auto; }
+      body { justify-content: flex-start; padding: 16px 0; }
+      
+      .spread {
+        width: 100vw;
+        height: auto;
+        margin: 0 auto;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .book {
+        width: 100vw;
+        height: auto;
+      }
+      .book-wrap { perspective: 1200px; }
+      
+      .page {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+      
+      .chapter-title { font-size: 16px; margin-bottom: 12px; }
+      
+      .body-text {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 12px;
+      }
+      .spread-meta {
+        font-size: 11px;
+        margin-top: auto;
+      }
+      
+      /* Navigation buttons - larger touch targets */
+      .nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 20px;
+      }
+    }
+
+    /* ── Small phones: 480px and below ── */
+    @media (max-width: 480px) {
+      .page { padding: 20px 12px; }
+      
+      .chapter-title { font-size: 15px; }
+      .body-text { font-size: 13px; }
+      .spread-meta { font-size: 10px; }
+      
+      .nav-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 18px;
+      }
+    }
+
+    /* ── Portrait orientation optimizations ── */
+    @media (orientation: portrait) and (max-width: 768px) {
+      .spread {
+        height: auto;
+        min-height: 100vh;
+      }
+      .page {
+        min-height: 50vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="spread">
+    <div class="page page-left">
+      <div class="epilogue-header">
+        <span class="epilogue-eyebrow">Reflections</span>
+        <h2 class="epilogue-title">The Path Forward</h2>
+      </div>
+      <div class="story">
+        <p>An industry visit is more than a sequence of site tours or a checklist of company profiles. It is the moment where the abstract concepts of the classroom meet the concrete machinery of the world. Over the past week, we have seen how technology breathes, how teams collaborate under pressure, and how innovation is sustained.</p>
+        <p>From the hum of the data centers in Manila to the historic quiet of the Baguio ridges, this journey has redefined our understanding of our field. We return not just with photographs, but with a clearer vision of where we fit in this vast professional landscape.</p>
+      </div>
+    </div>
+    
+    <div class="page page-right">
+      <div class="story" style="margin-top: 20px;">
+        <p>We are grateful for the bridges built during this tour—the mentors who shared their time, the companies that opened their doors, and the colleagues who shared the long roads in between. Every stop was a lesson; every conversation was a seed planted for our future careers.</p>
+        <p>The tour ends here, but the work is just beginning. We carry these experiences forward as we transition from students of technology to practitioners of it.</p>
+      </div>
+      
+      <div class="final-ornament"></div>
+      
+      <div class="sig-block">
+        <span class="sig-name">Marwina Samson</span>
+        <span class="sig-sub">Information Technology Portfolio · 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-bar">
+    <button class="nav-btn" onclick="window.location.href='chapter8.html'">← Back</button>
+    <button class="nav-btn" id="closeBookBtn">Close Book</button>
+  </nav>
+
+  <script>
+    (function(){
+      const closeBookBtn = document.getElementById('closeBookBtn');
+      const spread = document.querySelector('.spread');
+
+      closeBookBtn.addEventListener('click', () => {
+        if(!spread) {
+          window.location.href = 'lastcover.html';
+          return;
+        }
+
+        closeBookBtn.disabled = true;
+        spread.classList.add('closing-book');
+
+        window.setTimeout(() => {
+          window.location.href = 'lastcover.html';
+        }, 1350);
+      });
+    })();
+  </script>
+
+</body>
+</html>
