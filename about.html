@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Visit — About</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/css/responsive.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0E0E14;
+      --gold:       #B89A6A;
+      --gold-soft:  #D4BC96;
+      --gold-dim:   #8C7040;
+      --ink-bright: #EDE8DF;
+      --ink-mid:    #C8C2B5;
+      --ink-light:  #9A9488;
+      --ink-faint:  #6A6460;
+      --surface:    #1C1C24;
+      --surface2:   #22222C;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg);
+      font-family: 'EB Garamond', serif;
+      color: var(--ink-mid);
+      overflow-x: hidden;
+    }
+
+    /* ── Ambient background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(184,154,106,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 80%, rgba(184,154,106,0.04) 0%, transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Grain texture overlay ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT WRAPPER
+       ══════════════════════════════════════ */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ══════════════════════════════════════
+       BACK LINK
+       ══════════════════════════════════════ */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 28px 0 0;
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.65;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 1; }
+    .back-link::before {
+      content: '←';
+      font-size: 10px;
+      opacity: 0.8;
+    }
+
+    /* ══════════════════════════════════════
+       HERO / PAGE HEADER
+       ══════════════════════════════════════ */
+    .page-hero {
+      padding: 52px 0 40px;
+      border-bottom: 0.5px solid rgba(184,154,106,0.15);
+      margin-bottom: 56px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 54px);
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-size: 17px;
+      color: var(--ink-light);
+      line-height: 1.7;
+      max-width: 520px;
+      font-style: italic;
+    }
+
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .hero-rule-line { flex: 1; height: 0.5px; background: var(--gold); opacity: 0.2; }
+    .hero-rule-ornament {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      color: var(--gold);
+      opacity: 0.4;
+    }
+
+    /* ══════════════════════════════════════
+       SECTION SHARED
+       ══════════════════════════════════════ */
+    .section {
+      margin-bottom: 64px;
+      animation: fadeUp 0.9s ease both;
+    }
+    .section:nth-child(2) { animation-delay: 0.1s; }
+    .section:nth-child(3) { animation-delay: 0.2s; }
+    .section:nth-child(4) { animation-delay: 0.3s; }
+
+    .section-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.65;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--gold);
+      opacity: 0.2;
+    }
+
+    /* ══════════════════════════════════════
+       ABOUT THE PROJECT
+       ══════════════════════════════════════ */
+    .project-body p {
+      font-size: 16px;
+      line-height: 1.88;
+      color: var(--ink-mid);
+      margin-bottom: 18px;
+      text-align: justify;
+      hyphens: auto;
+    }
+    .project-body p:last-child { margin-bottom: 0; }
+    .project-body em { color: var(--ink-bright); font-style: italic; }
+
+    .project-body p.lead {
+      font-size: 19px;
+      color: var(--ink-bright);
+      line-height: 1.7;
+      font-style: italic;
+    }
+    .project-body p.lead::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 64px;
+      font-style: italic;
+      color: var(--gold);
+      float: left;
+      line-height: 0.78;
+      margin-right: 8px;
+      margin-top: 10px;
+    }
+
+    /* Stat pills */
+    .project-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 28px 0;
+    }
+    .stat-pill {
+      border: 0.5px solid rgba(184,154,106,0.28);
+      border-radius: 3px;
+      padding: 8px 16px;
+      background: rgba(184,154,106,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--gold-soft);
+      line-height: 1;
+    }
+    .stat-desc {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+
+    /* Chapter index */
+    .chapter-list {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .chapter-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.18s;
+      border: 0.5px solid transparent;
+    }
+    .chapter-item:hover {
+      background: rgba(184,154,106,0.06);
+      border-color: rgba(184,154,106,0.18);
+    }
+    .ch-num {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0.7;
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+    .ch-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink-mid);
+      flex: 1;
+    }
+    .ch-date {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--ink-faint);
+      opacity: 0.6;
+      white-space: nowrap;
+    }
+    .chapter-item:hover .ch-title { color: var(--ink-bright); }
+
+    /* ══════════════════════════════════════
+       AUTHOR CARD
+       ══════════════════════════════════════ */
+    .author-card {
+      background: var(--surface);
+      border: 0.5px solid rgba(184,154,106,0.18);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Subtle top accent bar */
+    .author-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.35;
+    }
+
+    .author-inner {
+      padding: 36px 36px 32px;
+      display: grid;
+      grid-template-columns: 148px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* ── Photo slot ── */
+    .author-photo {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .photo-frame {
+      width: 148px;
+      height: 186px;
+      border: 1px dashed rgba(184,154,106,0.3);
+      border-radius: 4px;
+      background: rgba(184,154,106,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .photo-frame:hover {
+      border-color: rgba(184,154,106,0.55);
+      background: rgba(184,154,106,0.07);
+    }
+    .photo-frame img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 3px;
+      display: none; /* shown via JS when uploaded */
+    }
+    .photo-icon {
+      opacity: 0.3;
+    }
+    .photo-hint {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      opacity: 0.6;
+      text-align: center;
+    }
+    .photo-caption {
+      font-family: 'EB Garamond', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: var(--ink-faint);
+      text-align: center;
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+
+    /* hidden file input trigger */
+    #photoInput { display: none; }
+
+    /* ── Author details ── */
+    .author-details {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .author-name-block {
+      border-bottom: 0.5px solid rgba(184,154,106,0.12);
+      padding-bottom: 16px;
+    }
+
+    .author-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-style: italic;
+      color: var(--ink-bright);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .author-title {
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.75;
+    }
+
+    .author-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+    }
+    .meta-key {
+      font-family: 'Jost', sans-serif;
+      font-size: 7.5px;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      flex-shrink: 0;
+      min-width: 64px;
+      opacity: 0.8;
+    }
+    .meta-val {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.35;
+    }
+
+    .author-bio-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      line-height: 1.78;
+      color: var(--ink-mid);
+      font-style: italic;
+      border-left: 2px solid rgba(184,154,106,0.35);
+      padding-left: 14px;
+    }
+
+    /* ══════════════════════════════════════
+       CLOSING ORNAMENT
+       ══════════════════════════════════════ */
+    .closing {
+      text-align: center;
+      padding: 48px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: fadeUp 0.9s 0.4s ease both;
+    }
+    .closing-ornament {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--gold);
+      opacity: 0.3;
+      letter-spacing: 12px;
+    }
+    .closing-text {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-faint);
+      opacity: 0.7;
+      letter-spacing: 0.06em;
+    }
+    .closing-back {
+      margin-top: 8px;
+      font-family: 'Jost', sans-serif;
+      font-size: 8px;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.5;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .closing-back:hover { opacity: 0.9; }
+
+    /* ══════════════════════════════════════
+       ANIMATIONS
+       ══════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ══════════════════════════════════════
+       MOBILE
+       ══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .page-wrap { padding: 0 20px 64px; }
+
+      .hero-title { font-size: clamp(28px, 8vw, 42px); }
+      .hero-subtitle { font-size: 15px; }
+
+      .project-body p { font-size: 15px; }
+      .project-body p.lead { font-size: 16px; }
+      .project-body p.lead::first-letter { font-size: 52px; }
+
+      .author-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 28px 22px 26px;
+      }
+
+      .author-photo {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .photo-frame {
+        width: 108px;
+        height: 136px;
+        flex-shrink: 0;
+      }
+
+      .photo-caption { font-size: 10px; max-width: 108px; }
+
+      .author-name { font-size: 22px; }
+      .author-bio-text { font-size: 14px; }
+
+      .chapter-item { padding: 10px 10px; }
+      .ch-date { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .page-wrap { padding: 0 16px 56px; }
+
+      .author-photo {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .photo-frame {
+        width: 130px;
+        height: 164px;
+      }
+
+      .project-stats { gap: 8px; }
+      .stat-pill { padding: 7px 12px; }
+      .stat-num { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Back link -->
+  <a href="index.html" class="back-link">Back to cover</a>
+
+  <!-- ── Hero ── -->
+  <header class="page-hero">
+    <span class="hero-eyebrow">Industry Visit · IVET Blog Project</span>
+    <h1 class="hero-title">About This<br>Project</h1>
+    <p class="hero-subtitle">A week-long journey through the industries of Metro Manila, documented page by page.</p>
+    <div class="hero-rule">
+      <div class="hero-rule-line"></div>
+      <span class="hero-rule-ornament">✦</span>
+      <div class="hero-rule-line"></div>
+    </div>
+  </header>
+
+  <!-- ── Section 1: About the Project ── -->
+  <section class="section">
+    <div class="section-label">About the Project</div>
+
+    <div class="project-body">
+      <p class="lead">This is a record of seven days spent crossing Metro Manila with a group of IT students, walking into companies, asking questions, and trying to understand what the future looks like from the inside.</p>
+
+      <p>The <em>Industry Visit and Educational Tour (IVET)</em> is a required program for fourth-year Bachelor of Science in Information Technology students at Western Mindanao State University. Each year, students travel to different cities to visit companies relevant to their field — observing real workflows, meeting professionals, and bridging the gap between academic learning and industry reality.</p>
+
+      <p>This storybook is my personal documentation of that week. It is not a formal report. It is a collection of notes, photographs, observations, and honest impressions gathered across each day  from the chaos of the airport at 3 AM to the quiet of the dormitory at night, and every company visit in between.</p>
+
+      <p>The goal was simple: <em>to remember it properly.</em></p>
+    </div>
+
+    <!-- Stats -->
+    <div class="project-stats">
+      <div class="stat-pill">
+        <span class="stat-num">7</span>
+        <span class="stat-desc">Days of travel</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num">6</span>
+        <span class="stat-desc">Companies visited</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num">8</span>
+        <span class="stat-desc">Chapters</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-num">2026</span>
+        <span class="stat-desc">April · Metro Manila</span>
+      </div>
+    </div>
+
+    <!-- Chapter index -->
+    <div class="section-label" style="margin-top:36px;">Chapters</div>
+    <nav class="chapter-list">
+      <a href="prologue.html" class="chapter-item">
+        <span class="ch-num">·</span>
+        <span class="ch-title">Prologue — Before We Left</span>
+        <span class="ch-date">Pre-departure</span>
+      </a>
+      <a href="chapter1.html" class="chapter-item">
+        <span class="ch-num">I</span>
+        <span class="ch-title">Departure & Day 0 — Arrival in Manila</span>
+        <span class="ch-date">April 5, 2026</span>
+      </a>
+      <a href="chapter2.html" class="chapter-item">
+        <span class="ch-num">II</span>
+        <span class="ch-title">Day 1 — HYTEC Power & OpenText Philippines</span>
+        <span class="ch-date">April 6, 2026</span>
+      </a>
+      <a href="chapter3.html" class="chapter-item">
+        <span class="ch-num">III</span>
+        <span class="ch-title">Day 2 — Top Peg Animation & Teleperformance</span>
+        <span class="ch-date">April 7, 2026</span>
+      </a>
+      <a href="chapter4.html" class="chapter-item">
+        <span class="ch-num">IV</span>
+        <span class="ch-title">Day 3 — Continuing the Journey</span>
+        <span class="ch-date">April 8, 2026</span>
+      </a>
+      <a href="chapter5.html" class="chapter-item">
+        <span class="ch-num">V</span>
+        <span class="ch-title">Final Days & Departure</span>
+        <span class="ch-date">April 9–11, 2026</span>
+      </a>
+    </nav>
+  </section>
+
+  <!-- ── Section 2: About the Author ── -->
+  <section class="section">
+    <div class="section-label">About the Author</div>
+
+    <div class="author-card">
+      <div class="author-inner">
+
+        <!-- Photo slot -->
+        <div class="author-photo">
+          <div class="photo-frame" id="photoFrame" title="Click to upload your photo">
+            <img id="authorPhoto" src="images/me/Marwina_Samson.png" alt="Author photo"/>
+            <svg class="photo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B89A6A" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6 21c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+            </svg>
+            <span class="photo-hint">Tap to add<br>your photo</span>
+          </div>
+          <p class="photo-caption">Marwina D. Samson<br>WMSU · 2026</p>
+          <input type="file" id="photoInput" accept="image/*"/>
+        </div>
+
+        <!-- Details -->
+        <div class="author-details">
+          <div class="author-name-block">
+            <div class="author-name">Marwina D. Samson</div>
+            <div class="author-title">Author · Photographer · Student</div>
+          </div>
+
+          <div class="author-meta">
+            <div class="meta-row">
+              <span class="meta-key">Course</span>
+              <span class="meta-val">Bachelor of Science in Information Technology</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Year</span>
+              <span class="meta-val">4th Year</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">School</span>
+              <span class="meta-val">Western Mindanao State University</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Role</span>
+              <span class="meta-val">Writer, photographer, and layout designer of this storybook</span>
+            </div>
+          </div>
+
+          <p class="author-bio-text">
+            An IT student with a tendency to write things down. This storybook began as a requirement and became something I actually wanted to finish, a record of a week that changed how I think about the industry I am about to enter.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Closing ── -->
+  <div class="closing">
+    <span class="closing-ornament">· · ·</span>
+    <p class="closing-text">This storybook was made with care, for the record.</p>
+    <a href="index.html" class="closing-back">← Return to cover</a>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<script>
+  /* ── Photo upload ── */
+  const frame  = document.getElementById('photoFrame');
+  const input  = document.getElementById('photoInput');
+  const imgEl  = document.getElementById('authorPhoto');
+  const icon   = frame.querySelector('.photo-icon');
+  const hint   = frame.querySelector('.photo-hint');
+
+  function showPhoto(){
+    if (!imgEl.getAttribute('src')) return;
+    imgEl.style.display = 'block';
+    icon.style.display  = 'none';
+    hint.style.display  = 'none';
+    frame.style.borderStyle = 'solid';
+    frame.style.borderColor = 'rgba(184,154,106,0.4)';
+  }
+
+  frame.addEventListener('click', () => input.click());
+
+  input.addEventListener('change', () => {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      imgEl.src = e.target.result;
+      showPhoto();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  showPhoto();
+
+  /* ── Fade-in on scroll (simple IntersectionObserver) ── */
+  const sections = document.querySelectorAll('.section');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    sections.forEach((s, i) => {
+      if (i > 0) { /* first section already visible */
+        s.style.opacity = '0';
+        s.style.transform = 'translateY(20px)';
+        s.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      }
+      io.observe(s);
+    });
+  }
+</script>
+
+</body>
+</html>

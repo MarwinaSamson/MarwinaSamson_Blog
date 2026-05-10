@@ -1235,10 +1235,10 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="nav-bar">
-    <button class="nav-btn" id="prevBtn">← Previous</button>
-    <button class="nav-btn" id="nextBtn">Next →</button>
-  </nav>
+<nav class="nav-bar">
+  <button class="nav-btn" id="prevBtn" href="prologue.html">← Previous</button>
+  <button class="nav-btn" id="nextBtn" href="chapter2.html">Next →</button>
+</nav>
 
   <!-- FILMSTRIP GALLERY MODAL -->
   <div class="film-overlay" id="filmOverlay" role="dialog" aria-modal="true" aria-label="Photo filmstrip">
@@ -1330,14 +1330,32 @@
         setTimeout(()=>{ idx = to; showIndex(idx); }, 780);
       }
 
+      const mql = window.matchMedia('(max-width: 768px)');
+      function scrollToSpread(i){
+        const el = spreads[i];
+        if(!el) return;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
       document.getElementById('nextBtn').addEventListener('click', ()=>{
         if(idx === total - 1) return window.location.href = 'chapter2.html';
+        if(mql.matches){
+          scrollToSpread(idx + 1);
+          idx = Math.min(total - 1, idx + 1);
+          return;
+        }
         go(1);
       });
       document.getElementById('prevBtn').addEventListener('click', ()=>{
         if(idx === 0) return window.location.href = 'prologue.html';
+        if(mql.matches){
+          scrollToSpread(idx - 1);
+          idx = Math.max(0, idx - 1);
+          return;
+        }
         go(-1);
       });
+
 
       window.addEventListener('keydown', (e)=>{
         if(document.getElementById('filmOverlay').classList.contains('open')) return;
@@ -1542,6 +1560,8 @@
 
     })();
   </script>
+
+  <script src="assets/js/mobile-nav.js"></script>
 
 </body>
 </html>
