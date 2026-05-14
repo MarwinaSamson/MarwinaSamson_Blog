@@ -787,7 +787,13 @@
     /* ── Medium phones: 600px and below ── */
     @media (max-width: 600px) {
       html, body { overflow-y: auto; }
-      body { justify-content: flex-start; padding: 16px 0; }
+      body {
+        display: block;
+        width: 100%;
+        justify-content: unset;
+        align-items: unset;
+        padding: 16px 0;
+      }
       
       .spread {
         width: 100vw;
@@ -960,8 +966,9 @@
             </div>
             <div class="story">
               <p class="dropcap">My alarm goes off at 3:00 AM. For a second I just lie there, listening to the sound of a house that does not know yet that today is different.</p>
-              <p>We leave the house at <span class="ph">[time you left]</span>. The streets are empty and everything feels like it belongs to us. Aunt and cousin help with bags. I keep checking my phone for the boarding pass that is already there.</p>
-              <p>We leave the house at <span class="ph">[time you left]</span>. The streets are empty and everything feels like it belongs to us. Aunt and cousin help with bags. I keep checking my phone for the boarding pass that is already there.</p>
+              <p>We leave the house at 4:15am. The streets are empty and everything feels like it belongs to us. Aunt and cousin help with bags. I keep checking my phone for the boarding pass that is already there.</p>
+              <p>We arrive at the airport around 4:40am. I start asking on chat group if where are everyone. My friends respond they are already inside, they already checked in. I already bid my goodbye to my aunta nd cousin and nervously stepped inside the airport building.</p>
+              <p>I roam my eyes inside the area and saw som of my batchmate there. They are from different section. I have a small talk with a girl from section B while standing on the line for our luggage check in.</p>
             </div>
             <span class="pg-num">— 1 —</span>
           </div>
@@ -969,8 +976,11 @@
             <div class="right-inner">
               <span class="continued-label">Continued</span>
               <div class="story-right">
-                <p>We arrive at the airport. Lights are bright, and the terminal hums with people moving to different lives. I breathe like this is a small, private ceremony.</p>
-                <p>Check-in, security, and waiting — time moves strangely at airports.</p>
+                <p>I proceed to the departure area and there they are — my classmates, already settled on the benches just in front of Gate 7.</p>
+                <p>Our flight is at 6:45. It is only 5:50. So we wait, and we talk the way only batchmates can — half nervous, half excited, filling the quiet with everything on our minds.</p>
+                <p>For many of us, this is the first time. First flight. First time going to Manila. So we ask each other — <em>how does it feel?</em> What did you pack? What are you most excited to see? What do you think will happen?</p>
+                <p>The conversations go on, layered and easy, until the airport staff steps up to the microphone and her voice cuts through the hum of the terminal — our flight is ready for boarding. We may now proceed to the aircraft. We look at each other. This is it.</p>
+             
               </div>
               <div class="img-block">
                 <div class="img-slot has-gallery"
@@ -1001,17 +1011,22 @@
               <span class="chapter-date">NAIA · Afternoon</span>
               <div class="chapter-rule"><div class="rule-line"></div><div class="rule-dot"></div><div class="rule-line"></div></div>
             </div>
-            <div class="story">
-              <p>We meet the DJM representative who will guide our tour. They are older, precise, and carry the kind of calm that makes itineraries happen. They lead us to the dorm where we'll stay for the week.</p>
-              <p>The dorm smells faintly of detergent and travel. Bunk beds, shared sinks, new roommates introductions — the kind of small rituals that feel like the start of something.</p>
-            </div>
+           <div class="story">
+            <p>Just an hour and twenty minutes later, the pilot's voice fills the cabin — we are now landing. Everyone begins to stir, gathering their things, straightening up. I say it quietly to myself: <em>welcome to Manila.</em></p>
+            <p>I lean toward the window. And there it is. Tall buildings. More buildings. Glass and concrete stretching as far as I can see — barely a patch of green in sight. So this is Manila. A world so different from the province we came from, where the trees outnumber the rooftops.</p>
+            <p>We land at NAIA Terminal 3. The terminal is wide and busy, and we follow the crowd toward the baggage claim. The queue is long — people pressed together, eyes fixed on the conveyor belt, waiting for their bags to appear. We wait too, a few minutes stretching longer than expected.</p>
+            
+          </div>
             <span class="pg-num">— 3 —</span>
           </div>
           <div class="page page-right">
             <div class="right-inner">
               <span class="continued-label">Accommodations</span>
               <div class="story-right">
-                <p>We unpack one small bag each. A map on the wall shows the city like a promise. Someone discovers a stray charger and becomes a hero.</p>
+                <p>But eventually, one by one, our bags come around. We collect ourselves, regroup, and make our way outside. And there — parked and waiting — is our bus. The one that will carry us through the next seven days.</p>
+                <p>We meet the DJM representative who will guide our tour. They are older, precise, and carry the kind of calm that makes itineraries happen. We board the bus and make our way to Quezon City, where the DJM dorm is located, our home for the next seven days.</p>
+                <p>The dorm smells faintly of detergent and travel.</p>
+                <p>At 11:00 we have our lunch, right there in the dorm. Simple and unhurried. After the morning of early rising, airports, and new surroundings, the meal feels like a small reward.</p>
               </div>
               <div class="img-block">
                 <div class="img-slot has-gallery"
@@ -1022,7 +1037,7 @@
                   <span class="img-slot-label">Insert dorm / DJM photo</span>
                   <span class="img-slot-caption"><span class="ph">[Dorm name or DJM rep]</span></span>
                 </div>
-                <p class="img-caption"><span class="ph">[Write a short caption for this photo]</span></p>
+                <p class="img-caption"><span class="ph">Our first ride on DJM Bus</span></p>
               </div>
               <div class="timestamp"><div class="timestamp-line"></div><span class="timestamp-text">Arrival · Dorm</span><div class="timestamp-line"></div></div>
             </div>
@@ -1044,14 +1059,17 @@
             </div>
             <div class="story">
               <p>Luneta smells of grass and roasted peanuts. We walk under a blue sky and the monument looks both smaller and larger than I expected. There are vendors and old men feeding pigeons and the city feels kindly.</p>
+              <p>This is one of the most historical places in the Philippines and standing here, I feel it. A quiet sadness settles in me as I try to imagine what happened on this very ground. This is where our national hero took his last breath, where he gave everything for a country he believed in more than his own life.</p>
+              <p>I look around at the open field and the people passing by, and I think — he died here, so that we could simply walk here. That is not a small thing.</p>
             </div>
             <span class="pg-num">— 5 —</span>
           </div>
           <div class="page page-right">
             <div class="right-inner">
               <span class="continued-label">Wander</span>
-              <div class="story-right">
-                <p>I take a photo of a street performer. Someone laughs at a silly joke. The day is soft and we have nowhere urgent to be.</p>
+              <div class="story">
+                <p>We roam around, cameras out, laughing into selfies and pointing at everything worth remembering. At some point we pull the DJM staff in and ask them to take our group photo — all of us lined up, grinning, the monument standing behind us like it has always been waiting for this.</p>
+                <p>Before we leave, we stop for ice cream from a sidewalk vendor. Simple, cold, and exactly right. The kind of ending a morning like this deserves.</p>
               </div>
               <div class="img-block">
                 <div class="img-slot has-gallery"

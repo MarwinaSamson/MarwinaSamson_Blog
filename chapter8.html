@@ -770,7 +770,13 @@
     /* ── Medium phones: 600px and below ── */
     @media (max-width: 600px) {
       html, body { overflow-y: auto; }
-      body { justify-content: flex-start; padding: 16px 0; }
+      body {
+        display: block;
+        width: 100%;
+        justify-content: unset;
+        align-items: unset;
+        padding: 16px 0;
+      }
       
       .spread {
         width: 100vw;
